@@ -1,0 +1,56 @@
+This is a simple flask web application(booking site) shipped with Docker container. MongoDB 5.0 is used for storage.
+runs at localhost:3000
+
+# Dependencies
+flask
+pymongo
+pyconfs
+toml
+Flask-Session
+bcrypt
+pydantic
+python-jose
+email-validator
+flask-httpauth
+Werkzeug
+Flask-Pydantic
+
+## How to run the application
+Step 1
+Enter the api folder and run the app.py file
+Alternatively, take advantage of the docker file if you have docker installed in your VM,
+and run the dockercompose file (sudo docker-compose build), to build both the application image,
+and pull the MongoDB image.
+Step 2
+Once the mongo server is up, run the shell script (demo_db_input folder) to populate the db
+with products and users. Note, the db needs it for authentication.
+
+Step 3
+Once the db is populated, the application is now ready for use.
+Three users are provide(one superuser(elyte),one registered client(visma_client) with 10% discount,
+and one normal client(normal_client) with 5% discount ).The passwordfor all the users is (string).
+See the (demo_db_input/data/valid_user) json file for the users.
+
+Step 4
+There are two login options(normal and google), the google is not implemented due time constraint.
+The application works without a user being logged in.
+a user not logged in is only entitled to special deals.
+
+Step 5
+The home page connsist of various products.the user has to to click the details button on a certain product,
+to buy it.
+
+Note
+Create user not implemented.
+
+the static folder contains images and a javascript file that controls the frontend.
+The templates folder contains the various pages.
+
+the modules folder , contains sub folders (auth(for user authentication),blueprints(for the various views/route),
+config(configuration files there is an env file also if the user want to control variables dynamically),
+the schema folder contains classes that represent the request and response for a user, pydantic is use to enforce,
+data types,the database folder contains the db connection and operations.)
+
+this application was designed with security in mind.So it has multiple layers of abstraction,and enforced security,
+with JWT token.
+

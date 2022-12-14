@@ -1,0 +1,12 @@
+flask
+pymongo
+pyconfs
+toml
+Flask-Session
+bcrypt
+pydantic
+python-jose
+email-validator
+flask-httpauth
+Werkzeug
+Flask-Pydantic

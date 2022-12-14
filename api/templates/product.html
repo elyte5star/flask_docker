@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h1>Place your Order.</h1>
+    <div class="framed">
+        <div class="prod_left">
+            <img src="/static/images/{{ details['image'] }}" alt="{{ details['name'] }}" width="200px" />
+            <div class="place">{{ details['location'] }}</div>
+        </div>
+        <div class="prod_right">
+            <h3>{{ details['name'] }}</h3>
+            <p>{{ details['description'] }}</p>
+            <h3>Unit Price: {{ price if price else details['price'] }} Kr.</h3>
+        </div>
+        <div class="prod_order">
+            <form action="{{ url_for("pages_bp.create_order") }}" method="POST">
+                <input type="hidden" name="pid" value="{{ details['pid'] }}" />
+                <input type="hidden" name="unit_price" value="{{ price if price else details['price'] }}" />
+                <label id="lb4">Quantity(multiples of 5):&nbsp
+                    <input type="number" name="volume" id="num_items" placeholder="e.g 5,10" step="5" min="5" value="5"></label>
+                <input class="form-btn" type="submit" value="Create Order" id="add_p">
+            </form>
+        </div>
+    </div>
+</div>
+<h1>Details</h1>
+
+    {% if 'details' in details %}
+        <div class="framed">{{ details['details']|safe }}</div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Login panel -->
+<div id="login_access">
+    <h2>Login</h2>
+    <table>
+        <tr>
+            <td>Username :</td>
+            <td><input type="text" onfocus="hide_add_entry('add_entry')" name="username" id="username" size="15" /></td>
+            <td rowspan="3">
+                <div class="container" id="g_id">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <a class="btn btn-outline-dark" href="javascript:void(0)" onclick="getGoogleToken()"
+                                role="button" style="text-transform:none">
+                                <img alt="Google sign-in" src="static/images/gg.png" class="google" />
+                                Login with Google
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Password :</td>
+            <td> <input type="password" onfocus="hide_add_entry('add_entry')" id="password" name="password"
+                    minlength="4" size="15" required></td>
+        </tr>
+        <tr>
+            <td> Login :</td>
+            <td><a href="javascript:void(0)" onclick="login();"><i class="fa fa-sign-in" aria-hidden="true"
+                        style="font-size:60px;"></i></td>
+        </tr>
+    </table>
+</div>
+
+<div id="add_entry" style="display: none">
+    <div class="close">
+        <a href="javascript:void(0)" onclick="hide_add_entry('add_entry');"><i class="fa fa-remove"></i></a>
+    </div>
+    <h2>Create user</h2>
+
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td>
+                <input type="text" name="username_" id="username_" size="15" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input type="text" name="email_" id="email_" size="15" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>Password:</td>
+            <td>
+                <input type="password" name="pass" id="pass" size="15" minlength="4" size="15" required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Confirm Password:</td>
+            <td>
+                <input type="password" name="pass_" id="pass_" size="15" minlength="4" size="15" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="b1" type="button" value="Add person" onclick="signUP();" style="width: 100%" />
+            </td>
+            <td>
+                <input id="b2" type="button" value="Cancel" onclick="hide_add_entry('add_entry');"
+                    style="width: 100%" />
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<div><span id="info2"></span></div>
+
+<!-- the button to Sign up -->
+<button class="form-btn" onclick="show_add_entry('add_entry');" type="button" id="add_p">Please, create a
+    User Acount.</button>
+</div>
+{% endblock %}

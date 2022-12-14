@@ -1,0 +1,120 @@
+{
+	"name": "rok-SVG",
+	"location": "Stavanger",
+	"price": 100.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "1.jpeg",
+	"category": "black"
+}
+{
+	"name": "rok-WAW",
+	"location": "Warsaw",
+	"price": 500.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "2.jpeg",
+	"category": "yellow"
+}
+{
+	"name": "rok-PL",
+	"location": "Gdansk",
+	"price": 900.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "3.jpeg",
+	"category": "grey"
+}
+{
+	"name": "rok-NGA",
+	"location": "Lagos",
+	"price": 900.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "4.jpeg",
+	"category": "red"
+}
+{
+	"name": "rok-NW",
+	"location": "New york",
+	"price": 1000.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "5.jpeg",
+	"category": "pink"
+}
+{
+	"name": "rok-PP",
+	"location": "Paris",
+	"price": 700.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "6.jpeg",
+	"category": "coal"
+}
+{
+	"name": "rok-B",
+	"location": "Berlin",
+	"price": 8900.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "7.jpeg",
+	"category": "rock"
+}
+{
+	"name": "rok-P",
+	"location": "Pune",
+	"price": 1300.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "8.jpeg",
+	"category": "mat"
+}
+{
+	"name": "rok-G",
+	"location": "Grimstad",
+	"price": 5800.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "9.jpeg",
+	"category": "pale"
+}
+{
+	"name": "rok-O",
+	"location": "Oslo",
+	"price": 1200.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"image": "10.jpeg",
+	"category": "pale"
+}
+{
+	"name": "rok-z",
+	"location": "Mars",
+	"price": 10000.89,
+	"description": "For small office",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-01-12T13:37:27+00:00",
+	"image": "11.jpeg",
+	"category": "pale"
+}
+{
+	"name": "rok-H",
+	"location": "Jupiter",
+	"price": 14500.89,
+	"description": "For small office downtown",
+	"details": "Ergonomic product for small office",
+	"created_at": "2022-10-12T13:37:27+00:00",
+	"image": "12.jpeg",
+	"category": "pale"
+}

@@ -1,0 +1,46 @@
+# Keys
+title = "Config file"
+
+# Tables
+[project]
+name = "Flask Application"
+description = "Visma technical test"
+version = "1.0.0"
+maintainers = ["Ogaga Uti <checkuti@gmail.com>"]
+author = "Ogaga Uti"
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: Proprietary",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[visma.app]
+name =  "Visma Flask Application."
+version = "1.0.0"
+description = """
+   #   Interactive Documentation for Wholesale Shopping Site
+    Simple Shopping Site
+   """
+[database]
+host = "db"
+port = 27017
+user = "mongoUser"
+pwd = "54321"
+admin_db = "visma_admin"
+
+[api]
+log_type = "INFO"
+host_url = "http://localhost:3000"
+debug = true
+algorithm = "HS256"
+secret_key = "e8f34224ff9095a88195945b64ed88307c076c05c47459f48c7b5cee1318886e"
+token_expire_min = 10
+host_port = 3000
+
+[hash]
+length = 16
+rounds = 10
+coding = "utf-8"

@@ -1,0 +1,35 @@
+version: '3.8'
+networks:
+  my_net:
+
+services:
+  db:
+    image: mongo:5.0
+    container_name: visma-db
+    restart: always
+    expose:
+      - 27017
+    networks:
+      - my_net
+    volumes:
+      - ./demo_db_input:/home/db_input
+      - ./db_data:/data/db 
+  api:
+    container_name: visma-api
+    image: visma-api
+    build:
+      context: ./api
+      dockerfile: ./backend.dockerfile
+    networks:
+      - my_net
+    ports:
+      # <Port exposed> : < Port running inside container>
+      - "3000:3000"
+    depends_on:
+      - db
+    links:
+      - db
+    env_file:
+      - app.env
+    volumes:
+      - ./api:/app/usr
