@@ -252,3 +252,4 @@ $RECYCLE.BIN/
 db_data/*
 !db_data/*.file
 
+*.env
