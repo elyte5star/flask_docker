@@ -81,17 +81,15 @@ class Order(Discount):
         if confirm_oder:
             # Clients not logged in
             if not session.get("user"):
-                self.admin_db.orders.update_one(
-                    {"userid": confirm_oder.userid},
-                    {
-                        "$set": {
-                            "email": confirm_oder.email,
-                            "telephone": confirm_oder.telephone,
-                        }
-                    },
-                )
-
-                model = ConfirmOrderResponse(message="Order Registered!")
+                filter = {"userid": confirm_oder.userid}
+                newval = {
+                    "$set": {
+                        "email": confirm_oder.email,
+                        "telephone": confirm_oder.telephone,
+                    }
+                }
+                res = self.admin_db.orders.update_one(filter, newval)
+                model = ConfirmOrderResponse(message=f"Order Registered!{res}")
                 return model.dict()
             else:
                 # Logged in clients

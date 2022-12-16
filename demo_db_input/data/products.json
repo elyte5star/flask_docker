@@ -1,61 +1,61 @@
 {
-	"name": "rok-SVG",
+	"name": "Item-SVG",
 	"location": "Stavanger",
 	"price": 100.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.The word ergonomic gets tossed around like it's the star ingredient in a wellness-word salad. We ourselves are guilty of blindly buying into products that are stamped with its body-support seal of approval — especially now that we're stuck at home in a make-shift office",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "1.jpeg",
+	"image": "1.png",
 	"category": "black"
 }
 {
-	"name": "rok-WAW",
+	"name": "Item-WAW",
 	"location": "Warsaw",
 	"price": 500.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "2.jpeg",
+	"image": "2.png",
 	"category": "yellow"
 }
 {
-	"name": "rok-PL",
+	"name": "Item-PL",
 	"location": "Gdansk",
 	"price": 900.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "3.jpeg",
+	"image": "3.png",
 	"category": "grey"
 }
 {
-	"name": "rok-NGA",
+	"name": "Item-NGA",
 	"location": "Lagos",
 	"price": 900.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "4.jpeg",
+	"image": "4.png",
 	"category": "red"
 }
 {
-	"name": "rok-NW",
+	"name": "Item-NW",
 	"location": "New york",
 	"price": 1000.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "5.jpeg",
+	"image": "5.png",
 	"category": "pink"
 }
 {
-	"name": "rok-PP",
+	"name": "Item-PP",
 	"location": "Paris",
 	"price": 700.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "6.jpeg",
+	"image": "6.png",
 	"category": "coal"
 }
 {
@@ -63,9 +63,9 @@
 	"location": "Berlin",
 	"price": 8900.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "7.jpeg",
+	"image": "7.png",
 	"category": "rock"
 }
 {
@@ -73,9 +73,9 @@
 	"location": "Pune",
 	"price": 1300.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "8.jpeg",
+	"image": "8.png",
 	"category": "mat"
 }
 {
@@ -83,9 +83,9 @@
 	"location": "Grimstad",
 	"price": 5800.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "9.jpeg",
+	"image": "9.png",
 	"category": "pale"
 }
 {
@@ -93,9 +93,9 @@
 	"location": "Oslo",
 	"price": 1200.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-09-12T13:37:27+00:00",
-	"image": "10.jpeg",
+	"image": "10.png",
 	"category": "pale"
 }
 {
@@ -103,9 +103,9 @@
 	"location": "Mars",
 	"price": 10000.89,
 	"description": "For small office",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-01-12T13:37:27+00:00",
-	"image": "11.jpeg",
+	"image": "11.png",
 	"category": "pale"
 }
 {
@@ -113,8 +113,8 @@
 	"location": "Jupiter",
 	"price": 14500.89,
 	"description": "For small office downtown",
-	"details": "Ergonomic product for small office",
+	"details": "Ergonomic product for small office.Ahead, a shopping guide we hope will make your at-home office feel less makeshift and more professionally aligned — broken down by what each ergonomic item is supporting, backed by people who actually felt supported by it",
 	"created_at": "2022-10-12T13:37:27+00:00",
-	"image": "12.jpeg",
+	"image": "12.png",
 	"category": "pale"
 }

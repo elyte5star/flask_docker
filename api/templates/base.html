@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>SIMPLE BOOKING SITE</title>
+    <title>BOOKING SITE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -21,7 +21,7 @@
     {% if username %}
     <header>
         <div id="logo">
-            <h1>Best Furnitures</h1>
+            <h1><a href="/">Best Toys</a></h1>
         </div>
         <!-- Navigation bar -->
         <nav>
@@ -40,7 +40,7 @@
     {% else %}
     <header>
         <div id="logo">
-            <h1>Furniture AS</h1>
+            <h1><a href="/">Toys World</a></h1>
         </div>
         <nav>
             <ul>
@@ -56,19 +56,22 @@
     <main class="container">
         <h1 id="info">Welcome<span id="user_id"></span></h1>
         <img src="/static/images/tech.jpeg" alt="Tech" class="banner" />
-        
+
         {% block content %}
 
         {% endblock %}
 
     </main>
 
+
+    {# --- Footer --- #}
+    <footer>
+        <div class="con"><span class="strong">Customer Service: Telephone:</span> | +4740978057 | Email: <a
+                href="#">checkuti@gmail.com</a></div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
 </body>
-<footer>
-    <div class="con"><span class="strong">Telephone:</span> | +4740978057 | <a href="#">checkuti@gmail.com</a></div>
-</footer>
 
 </html>

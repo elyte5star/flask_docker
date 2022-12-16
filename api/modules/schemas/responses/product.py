@@ -14,7 +14,7 @@ class GetProductsResponse(BaseResponse):
 
 
 class GetProductsDealsResponse(GetProductsResponse):
-    data: List = []
+    pass
 
 
 class CreateProductResponse(BaseResponse):

@@ -39,12 +39,12 @@ def index():
 def product(pid: str, price: str):
     details = handler_prod.get_product_details(pid)
     if not session.get("user"):
-        return render_template("product.html", details=details, price=price)
+        return render_template("product.html", details=details["data"], price=price)
     user_info = session.get("user")
     return render_template(
         "product.html",
         username=user_info["username"],
-        details=details,
+        details=details["data"],
         price=price,
     )
 

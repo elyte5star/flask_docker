@@ -1,6 +1,4 @@
 from flask import render_template
-from typing import Tuple
-from modules.database.mongodb.base import Database
 from modules.schemas.responses.product import (
     GetProductsDetailsResponse,
     GetProductsResponse,
@@ -13,14 +11,13 @@ from modules.schemas.requests.product import (
 )
 from bson.objectid import ObjectId
 from flask_pydantic import validate
+from modules.database.mongodb.orders import Discount
 
 
-class Product(Database):
+class Product(Discount):
     @validate()
     def get_all_products(self) -> GetProductsResponse:
-        cursor = self.admin_db.products.find(
-            {}, {"created_at": 0, "description": 0, "details": 0}
-        )
+        cursor = self.admin_db.products.find({}, {"created_at": 0, "description": 0})
         if cursor:
             product_list = []
             for product in cursor:
@@ -32,36 +29,31 @@ class Product(Database):
             return model.dict()
         return self.bad_request("No products found!")
 
-    def get_product_details(self, product_id: str):
+    def get_product_details(self, product_id: str) -> GetProductsDetailsResponse:
         product_dict = self.admin_db.products.find_one({"_id": ObjectId(product_id)})
         if product_dict:
             product_dict["pid"] = str(product_dict.pop("_id"))
-            return product_dict
+            model = GetProductsDetailsResponse(data=product_dict)
+            return model.dict()
         return self.bad_request("No product details found!")
 
     # ==========================================#
     # Special deals based on season for everyone#
     # ===========================================#
 
-    @validate()
     def _special_deals(self) -> GetProductsDealsResponse:
         discount = 0.05  #### Five percent discount
-        cursor = self.admin_db.products.find(
-            {}, {"created_at": 0, "location": 0, "description": 0, "details": 0}
-        )
-        if cursor:
-            product_list = []
-            for product in cursor:
-                product["pid"] = str(
-                    product.pop("_id")
-                )  # You can add and if statement here to select the category of product that should have discount
-                disc = product["price"] * discount
-                discount_price = product["price"] - disc
-                product["price"] = str(round(discount_price, 2))
-                product_list.append(product)
+        res = self.get_all_products()
+        product_list = res["data"]
+        if product_list:
+            product_list_deals = []
+            for product in product_list:
+                # You can add and if statement here to select the category of product that should have discount
+                product["price"] = self.calculate_discount(product["price"], discount)
+                product_list_deals.append(product)
                 model = GetProductsDealsResponse(
-                    data=product_list,
-                    message=f"Total number of Xmas special deals: {len(product_list)}",
+                    data=product_list_deals,
+                    message=f"Total number of Xmas special deals: {len(product_list_deals)}",
                 )
             return model.dict()
         return self.bad_request("No deals!")
