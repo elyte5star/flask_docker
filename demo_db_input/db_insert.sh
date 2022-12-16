@@ -1,3 +1,3 @@
-mongoimport --db visma_admin --collection products  ./data/products.json
-mongoimport --db visma_admin --collection users ./data/valid_user.json
-mongosh visma_admin ./data/db_user.js
+mongoimport --db elyte_admin --collection products  ./data/products.json
+mongoimport --db elyte_admin --collection users ./data/valid_user.json
+mongosh elyte_admin ./data/db_user.js

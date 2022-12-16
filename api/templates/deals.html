@@ -7,11 +7,12 @@
 
     <article class="framed column">
         <div class="prod_left">
-            <img src="/static/images/{{ product['image'] }}" alt="{{ product['name'] }}" width="200px" />
+            <img src="/static/images/{{ product['image'] }}" alt="{{ product['name'] }}" width="200px" height="200px" />
             <div class="place">{{ product['location'] }}</div>
         </div>
         <div class="prod_right">
             <h3>{{ product['name'] }}</h3>
+            <p>{{ product['details'] }}</p>
             <h4>{{ product['price'] }} Kr.</h4>
         </div>
         <a href="{{ url_for('pages_bp.product', pid=product.pid,price=product.price) }}">

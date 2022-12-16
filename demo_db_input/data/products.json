@@ -1,5 +1,5 @@
 {
-	"name": "Item-SVG",
+	"name": "Angry Bird-l",
 	"location": "Stavanger",
 	"price": 100.89,
 	"description": "For small office",
@@ -8,8 +8,9 @@
 	"image": "1.png",
 	"category": "black"
 }
+
 {
-	"name": "Item-WAW",
+	"name": "Angry Bird-i",
 	"location": "Warsaw",
 	"price": 500.89,
 	"description": "For small office",
@@ -19,7 +20,7 @@
 	"category": "yellow"
 }
 {
-	"name": "Item-PL",
+	"name": "Angry Bird-w",
 	"location": "Gdansk",
 	"price": 900.89,
 	"description": "For small office",
@@ -29,7 +30,7 @@
 	"category": "grey"
 }
 {
-	"name": "Item-NGA",
+	"name": "Angry Bird",
 	"location": "Lagos",
 	"price": 900.89,
 	"description": "For small office",
@@ -39,7 +40,7 @@
 	"category": "red"
 }
 {
-	"name": "Item-NW",
+	"name": "Clash of clans-v",
 	"location": "New york",
 	"price": 1000.89,
 	"description": "For small office",
@@ -49,7 +50,7 @@
 	"category": "pink"
 }
 {
-	"name": "Item-PP",
+	"name": "Clash of clans-a",
 	"location": "Paris",
 	"price": 700.89,
 	"description": "For small office",
@@ -59,7 +60,7 @@
 	"category": "coal"
 }
 {
-	"name": "rok-B",
+	"name": "Clash of clans-q",
 	"location": "Berlin",
 	"price": 8900.89,
 	"description": "For small office",
@@ -69,7 +70,7 @@
 	"category": "rock"
 }
 {
-	"name": "rok-P",
+	"name": "Clash of clans-r",
 	"location": "Pune",
 	"price": 1300.89,
 	"description": "For small office",
@@ -79,7 +80,7 @@
 	"category": "mat"
 }
 {
-	"name": "rok-G",
+	"name": "Super Mario",
 	"location": "Grimstad",
 	"price": 5800.89,
 	"description": "For small office",
@@ -89,7 +90,7 @@
 	"category": "pale"
 }
 {
-	"name": "rok-O",
+	"name": "Clash of clans-o",
 	"location": "Oslo",
 	"price": 1200.89,
 	"description": "For small office",
@@ -99,7 +100,7 @@
 	"category": "pale"
 }
 {
-	"name": "rok-z",
+	"name": "Clash of clans-n",
 	"location": "Mars",
 	"price": 10000.89,
 	"description": "For small office",
@@ -109,7 +110,7 @@
 	"category": "pale"
 }
 {
-	"name": "rok-H",
+	"name": "Clash of clans -m",
 	"location": "Jupiter",
 	"price": 14500.89,
 	"description": "For small office downtown",

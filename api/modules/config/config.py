@@ -57,9 +57,9 @@ class Config:
         self.rounds = cf.hash.rounds
         self.coding = cf.hash.coding
 
-        self.name = cf.visma.app["name"]
-        self.version = cf.visma.app.version
-        self.description = cf.visma.app.description
+        self.name = cf.app["name"]
+        self.version = cf.app.version
+        self.description = cf.app.description
 
         self.algorithm = cf.api.algorithm
         self.secret_key = cf.api.secret_key

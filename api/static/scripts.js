@@ -154,26 +154,33 @@ function confirm() {
     let userid = document.getElementById("userid").value;
     let data;
     if (!email || !tel) {
-        data = { "email": "known@aon.com", "telephone": "6666666", "userid": userid }
+        data = { "email": "placeholder@aon.com", "telephone": "6666666", "userid": userid }
     } else {
         data = { "email": email.value, "telephone": tel.value, "userid": userid };
     }
-    auxPost("./orders/confirm", data).then((response_data) => {
-        if (response_data['success'] === true) {
-            console.log(response_data);
-            Swal.fire({
-                icon: "success",
-                timerProgressBar: true,
-                title: "Thanks for shopping with us!",
-                showConfirmButton: false,
-                timer: 1500,
-            });
-            return redirect();
-        } else {
 
-            return ($("#info2").html("<strong>Wrong!</strong> " + " Failed Operation!"));
-        }
-    });
+    if (is_Input_Error(email) && is_valid_Tel(tel)) {
+        auxPost("./orders/confirm", data).then((response_data) => {
+            if (response_data['success'] === true) {
+                console.log(response_data);
+                Swal.fire({
+                    icon: "success",
+                    timerProgressBar: true,
+                    title: "Thanks for shopping with us!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                return redirect();
+            } else {
+
+                return ($("#info2").html("<strong>Wrong!</strong> " + " Failed Operation!"));
+            }
+        });
+
+    } else {
+
+        return ($("#info2").html("<strong>Wrong!</strong> " + " Invalid email or tel!"));
+    }
 
 }
 

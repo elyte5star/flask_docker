@@ -4,8 +4,8 @@ networks:
 
 services:
   db:
-    image: mongo:5.0
-    container_name: visma-db
+    image: mongo:6.0
+    container_name: elyte-db
     restart: always
     expose:
       - 27017
@@ -15,8 +15,8 @@ services:
       - ./demo_db_input:/home/db_input
       - ./db_data:/data/db 
   api:
-    container_name: visma-api
-    image: visma-api
+    container_name: elyte-api
+    image: elyte-api
     build:
       context: ./api
       dockerfile: ./backend.dockerfile
