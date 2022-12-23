@@ -4,7 +4,9 @@
 	"email": "elyte5star@gmail.com",
 	"admin": true,
 	"active": false,
-	"created_at": "2022-09-12T13:37:27+00:00"
+	"created_at": "2022-09-12T13:37:27+00:00",
+	"agreed_discount": 0.0001,
+	"telephone": "40978057"
 }
 {
 	"username": "elyte_client",

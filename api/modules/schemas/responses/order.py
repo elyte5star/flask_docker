@@ -7,7 +7,6 @@ class CreateOrderResponse(BaseResponse):
     pid: str
     userid: str
     volume: str
-    created_at: datetime
     sale_price: float
 
 
@@ -16,4 +15,4 @@ class GetOrderResponse(BaseResponse):
 
 
 class ConfirmOrderResponse(BaseResponse):
-    pass
+    oid: str = ""

@@ -40,6 +40,8 @@ class Auth(Database):
                 "username": user["username"],
                 "userid": data["userid"],
                 "discount": rabbat,
+                "email": user["email"],
+                "telephone": user["telephone"],
             }
             return TokenResponse(
                 token_data={

@@ -30,7 +30,7 @@ def index():
         return render_template("index.html", products=list_products)
     user_info = session.get("user")
     return render_template(
-        "index.html", username=user_info["username"], products=list_products
+        "index.html", userinfo=user_info, products=list_products
     )
 
 
@@ -43,7 +43,7 @@ def product(pid: str, price: str):
     user_info = session.get("user")
     return render_template(
         "product.html",
-        username=user_info["username"],
+        userinfo=user_info,
         details=details["data"],
         price=price,
     )
@@ -59,7 +59,7 @@ def create_order(form: CreateOrder) -> CreateOrderResponse:
     if not session.get("user"):
         return render_template("order.html", order=res)
     user_info = session.get("user")
-    return render_template("order.html", order=res, username=user_info["username"])
+    return render_template("order.html", order=res, userinfo=user_info)
 
 
 @pages_bp.route("/login")
@@ -75,7 +75,7 @@ def special_deals() -> GetProductsDealsResponse:
     if "user" in session:
         user_info = session.get("user")
         return render_template(
-            "deals.html", products=deals, username=user_info["username"]
+            "deals.html", products=deals, userinfo=user_info
         )
     return render_template("deals.html", products=deals)
 
@@ -86,11 +86,11 @@ def admin_module():
     if not session.get("user") and request.endpoint != "login":
         return redirect(url_for("pages_bp.login"))
     user_info = session.get("user")
-    return render_template("admin.html", username=user_info["username"])
+    return render_template("admin.html", userinfo=user_info)
 
 
 @pages_bp.route("/logout")
 @validate()
 def logout():
-    session.clear()
+    session.pop("user")
     return BaseResponse(message="You are logged out!")

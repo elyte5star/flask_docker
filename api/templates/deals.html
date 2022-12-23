@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<div id="deals">
+
     <h1>Xmas Special Deals</h1>
 
     {% for product in products.data %}
@@ -12,7 +12,7 @@
         </div>
         <div class="prod_right">
             <h3>{{ product['name'] }}</h3>
-            <p>{{ product['details'] }}</p>
+            <p>{{ product['description'] }}</p>
             <h4>{{ product['price'] }} Kr.</h4>
         </div>
         <a href="{{ url_for('pages_bp.product', pid=product.pid,price=product.price) }}">
@@ -22,5 +22,4 @@
 
     {% endfor %}
 
-</div>
 {% endblock %}

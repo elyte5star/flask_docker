@@ -1,43 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
-<div>
-    <h1>Confirm Order.</h1>
-    <input type="hidden" id="userid" name="userid" value="{{ order['userid'] }}" />
 
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2" class="name">Your details</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="detail-label">Total Price:</td>
-                <td class="detail-value">{{ order.sale_price }} Kr</td>
-            </tr>
-            <tr>
-                <td class="detail-label">Quantity</td>
-                <td class="detail-value">{{ order.volume }}</td>
-            </tr>
-            {% if username is not defined %}
-            <tr>
-                <td class="detail-label">Enter your email:</td>
-                <td class="detail-label"><input type="text" name="aux_email" id="aux_email" size="15" /></td>
-            </tr>
-            <tr>
-                <td class="detail-label">Enter your telephone:</td>
-                <td class="detail-value"><input type="text" name="aux_tel"id="aux_tel" size="15" /></td>
-            </tr>
-            {% endif %}
-            <tr>
-                <td> Confirm! :</td>
-                <td><a href="javascript:void(0)" onclick="confirm();"><i class="fa fa-sign-in" aria-hidden="true"style="font-size:60px;"></i></td>
-            </tr>
-        </tbody>
-    </table>
-   
-    
+<h1>Confirm Order.</h1>
+<input type="hidden" id="userid" name="userid" value="{{ order['userid'] }}" />
+<input type="hidden" id="pid" name="pid" value="{{ order['pid'] }}" />
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="2" class="name">Your details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="detail-label">Total Price:</td>
+            <td class="detail-value">{{ order.sale_price }} Kr</td>
+        </tr>
+        <tr>
+            <td class="detail-label">Quantity</td>
+            <td class="detail-value">{{ order.volume }}</td>
+        </tr>
+        {% if userinfo is not defined %}
+        <tr>
+            <td class="detail-label">Enter your email:</td>
+            <td class="detail-label"><input type="text" name="aux_email" id="aux_email" size="15"
+                    placeholder="elyte@37.com" /></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Enter your telephone:</td>
+            <td class="detail-value"><input type="text" name="aux_tel" id="aux_tel" size="15" placeholder="12345678" />
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td class="detail-label">Enter your email:</td>
+            <td class="detail-label"><input type="text" name="aux_email" id="aux_email" size="15"
+                    value="{{ userinfo.email }}" disabled /></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Enter your telephone:</td>
+            <td class="detail-value"><input type="text" name="aux_tel" id="aux_tel" size="15"
+                    value="{{ userinfo.telephone }}" disabled /></td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td> Please Confirm :</td>
+            <td><a href="javascript:void(0)" onclick="confirm();"><i class="fa fa-sign-in" aria-hidden="true"
+                        style="font-size:60px;"></i></td>
+        </tr>
+    </tbody>
+</table>
 
 <div><span id="info2"></span></div>
-</div>
 {% endblock %}

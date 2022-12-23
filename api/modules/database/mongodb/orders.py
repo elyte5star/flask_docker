@@ -1,8 +1,13 @@
 from typing import Tuple
 from modules.database.mongodb.base import Database
 from modules.schemas.requests.order import ConfirmOrderRequest, CreateOrder
-from modules.schemas.responses.order import ConfirmOrderResponse, CreateOrderResponse
+from modules.schemas.responses.order import (
+    ConfirmOrderResponse,
+    CreateOrderResponse,
+    GetOrderResponse,
+)
 from flask_pydantic import validate
+from modules.auth.auth_bearer import security
 from flask import session
 from bson.objectid import ObjectId
 
@@ -46,54 +51,71 @@ class Order(Discount):
         volume = form_data.volume
         unit_price = form_data.unit_price
         if form_data:
-            # check if the client is logged in and get the discount and not admin
-            if "user" in session and session["user"]["discount"]:
+            # check if the client is logged in
+            if "user" in session:
                 user_dict = session.get("user")
-                print(user_dict)
                 discount = user_dict["discount"]
                 _total_price = unit_price * int(volume)
                 total_price = self.calculate_discount(_total_price, discount)
                 model = CreateOrderResponse(
-                    created_at=self.time_now(),
+                    message="Order created",
                     sale_price=total_price,
                     volume=volume,
                     userid=user_dict["userid"],
                     pid=form_data.pid,
                 )
-                self.admin_db.orders.insert_one(model.dict())
                 return model.dict()
 
-            # ordinary customers with non registered account
-            total_price = unit_price * int(volume)
-            model = CreateOrderResponse(
-                created_at=self.time_now(),
-                sale_price=total_price,
-                volume=volume,
-                userid=self.get_indent(),
-                pid=form_data.pid,
-            )
-            self.admin_db.orders.insert_one(model.dict())
-            return model.dict()
+            # ordinary customers with non registered account or admin
+            else:
+                total_price = unit_price * int(volume)
+                model = CreateOrderResponse(
+                    message="Order created",
+                    sale_price=total_price,
+                    volume=volume,
+                    userid=self.get_indent(),
+                    pid=form_data.pid,
+                )
+
+                return model.dict()
 
         return self.bad_request("Product does not exist!")
 
     def _confirm_order(self, confirm_oder: ConfirmOrderRequest) -> ConfirmOrderResponse:
         if confirm_oder:
-            # Clients not logged in
+            conf_dict = confirm_oder.dict()
+            conf_dict["created_at"] = self.time_now()
+            # Clients without account
             if not session.get("user"):
-                filter = {"userid": confirm_oder.userid}
-                newval = {
-                    "$set": {
-                        "email": confirm_oder.email,
-                        "telephone": confirm_oder.telephone,
-                    }
-                }
-                res = self.admin_db.orders.update_one(filter, newval)
-                model = ConfirmOrderResponse(message=f"Order Registered!{res}")
+                result = self.admin_db.orders.insert_one(conf_dict)
+                model = ConfirmOrderResponse(
+                    message="Order Registered!", oid=str(result.inserted_id)
+                )
                 return model.dict()
             else:
                 # Logged in clients
-                model = ConfirmOrderResponse(message="Order Already Registered!")
+                user_dict = session.get("user")
+                conf_dict["userid"] = user_dict["userid"]
+                conf_dict["email"] = user_dict["email"]
+                conf_dict["telephone"] = user_dict["telephone"]
+                result = self.admin_db.orders.insert_one(conf_dict)
+                model = ConfirmOrderResponse(
+                    message="Order Registered!", oid=str(result.inserted_id)
+                )
                 return model.dict()
 
         return self.bad_request("Can't confirm the order!")
+
+    @security.login_required
+    def _get_orders(self):
+        cursor = self.admin_db.orders.find({})
+        if cursor:
+            order_list = []
+            for order in cursor:
+                order["oid"] = str(order.pop("_id"))
+                order_list.append(order)
+            model = GetOrderResponse(
+                orders=order_list, message=f"num_orders {len(order_list)}"
+            )
+            return model.dict()
+        return self.bad_request("No orders found!")

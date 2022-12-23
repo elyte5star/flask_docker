@@ -1,10 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-<div>
-
-    <h1 id="info">Admin Module<span id="user_id"></span></h1>
-
-    <!-- the container will contain stats -->
-    <div id="list"></div>
+<div class="row">
+    <div class="col-md-6">
+        <h3 style="text-align: center">Order statistics</h3><br>
+        <canvas id="orderChart" width="650" height="450"></canvas>
+    </div>
+    <div class="col-md-5 col-md-offset-1">
+        <h3 style="text-align: center">Most popular products</h3><br>
+        <table id="popularProducts" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>No. of orders</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for p in number_of_bookings %}
+                {% set id = p[0] %}
+                <tr>
+                    <th class="text-center">#{{ loop.index }}</th>
+                    <td class="text-center">{{ id }}</td>
+                    <td>{{ popular_properties[id].property_name }}</td>
+                    <td>{{ popular_properties[id].property_location }}</td>
+                    <td class="text-center">{{ p[1] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
+<button class="form-btn" onclick="getOrders();" type="button" >Test</button>
 {% endblock %}

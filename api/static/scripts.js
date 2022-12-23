@@ -1,4 +1,14 @@
+$(document).ready(function () {
+    $('#popularProducts').DataTable({
+        "ordering": false,
+        "paging": false,
+        "searching": false,
+        "info": false
+    });
 
+
+
+});
 function handleErrors(response) {
     console.log(response.status);
     if (response.redirected) {
@@ -149,39 +159,39 @@ async function specialDeals() {
 }
 
 function confirm() {
-    let tel = document.getElementById("aux_tel");
-    let email = document.getElementById("aux_email");
+    let tel = document.getElementById("aux_tel").value;
+    let email = document.getElementById("aux_email").value;
     let userid = document.getElementById("userid").value;
-    let data;
-    if (!email || !tel) {
-        data = { "email": "placeholder@aon.com", "telephone": "6666666", "userid": userid }
-    } else {
-        data = { "email": email.value, "telephone": tel.value, "userid": userid };
-    }
+    let pid = document.getElementById("pid").value;
+    if (!email_telephone_Error(email, tel)) {
+        let data = { "email": email, "telephone": tel, "userid": userid, "pid": pid };
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, confirm order!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                auxPost("./orders/confirm", data).then((response_data) => {
+                    if (response_data['success'] === true) {
+                        Swal.fire(
+                            'Confirmed!',
+                            'Your Order is confirmed.',
+                            'success'
+                        )
+                        return redirect("/");
+                    } else {
 
-    if (is_Input_Error(email) && is_valid_Tel(tel)) {
-        auxPost("./orders/confirm", data).then((response_data) => {
-            if (response_data['success'] === true) {
-                console.log(response_data);
-                Swal.fire({
-                    icon: "success",
-                    timerProgressBar: true,
-                    title: "Thanks for shopping with us!",
-                    showConfirmButton: false,
-                    timer: 1500,
+                        return ($("#info2").html("<strong>Wrong!</strong> " + " Failed Operation!"));
+                    }
                 });
-                return redirect();
-            } else {
 
-                return ($("#info2").html("<strong>Wrong!</strong> " + " Failed Operation!"));
             }
-        });
-
-    } else {
-
-        return ($("#info2").html("<strong>Wrong!</strong> " + " Invalid email or tel!"));
-    }
-
+        })
+    };
 }
 
 
@@ -261,16 +271,79 @@ async function signUP() {
 
 
 /* Admin functions */
-async function users() {
-    const returned_result = await getData("./users/all").then((result) => {
+async function getOrders() {
+    const returned_result = await getData("./orders/all").then((result) => {
         console.log(result);
     });
 }
 
+function orderChart() {
+    var bookingsPerDay;//order per day
+    var bookingChartLabels = []
+    var bookingChartData = []
+
+    $.each(bookingsPerDay, function (key, value) {
+        var dateObj = new Date(key);
+        console.log(dateObj)
+        bookingChartLabels.push(dateObj);
+        bookingChartData.push(value);
+    });
+
+    /** OrderChart creation */
+    var ctx = document.getElementById("orderChart").getContext('2d');
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: bookingChartLabels,
+            datasets: [{
+                label: 'First dataset',
+                backgroundColor: '#5DA5DA',
+                borderColor: '#5DA5DA',
+                data: bookingChartData,
+
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem) {
+                        return tooltipItem.yLabel;
+                    }
+                }
+            },
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        unitStepSize: 3,
+                        displayFormats: {
+                            'day': 'DD MMM YY'
+                        }
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+
+}
+
+
+
+
 /* Helper functions */
 
-function redirect() {
-    window.location.href = "/";
+function redirect(path_string) {
+    window.location.replace(path_string);
 }
 
 
@@ -308,9 +381,9 @@ function show_add_entry(id) {
     element.style.display = "";
 }
 
-function is_valid_Tel(tel) {
-    var re = /^[0-9()+\-\s]*$/;
-    return re.test(tel);
+function validatePhoneNumber(input_str) {
+    var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+    return re.test(input_str);
 }
 
 function is_valid_letter(name) {
@@ -341,6 +414,27 @@ function is_Input_Error(name, email = "", password = "", password_ = "") {
     // check for valid letters
     else if (name.length > 0 && !isUserNameValid(name)) {
         $("#info2").html("<strong>Wrong!</strong> " + " Invalid letters for username!");
+    }
+    // no error
+    else {
+        return false;
+    }
+    return true;
+}
+function email_telephone_Error(email, tel) {
+    if (tel.length == 0) {
+        $("#info2").html("<strong>Wrong!</strong> " + " Empty telephone field!");
+    }
+    else if (email.length == 0) {
+        $("#info2").html("<strong>Wrong!</strong> " + " Empty email field!");
+    }
+    // check for valid email
+    else if (email.length > 0 && !is_valid_Email(email)) {
+        $("#info2").html("<strong>Wrong!</strong> " + " Invalid email address!");
+    }
+    // check for valid telephone
+    else if (tel.length > 0 && !validatePhoneNumber(tel)) {
+        $("#info2").html("<strong>Wrong!</strong> " + " Invalid letters for telephone!");
     }
     // no error
     else {

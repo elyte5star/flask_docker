@@ -17,7 +17,7 @@ from modules.database.mongodb.orders import Discount
 class Product(Discount):
     @validate()
     def get_all_products(self) -> GetProductsResponse:
-        cursor = self.admin_db.products.find({}, {"created_at": 0, "description": 0})
+        cursor = self.admin_db.products.find({}, {"created_at": 0, "details": 0})
         if cursor:
             product_list = []
             for product in cursor:

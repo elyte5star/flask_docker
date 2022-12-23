@@ -12,3 +12,4 @@ class ConfirmOrderRequest(BaseModel):
     email: str = ""
     telephone: str = ""
     userid: str = ""
+    pid: str = ""
