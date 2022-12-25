@@ -29,9 +29,7 @@ def index():
     if not session.get("user"):
         return render_template("index.html", products=list_products)
     user_info = session.get("user")
-    return render_template(
-        "index.html", userinfo=user_info, products=list_products
-    )
+    return render_template("index.html", userinfo=user_info, products=list_products)
 
 
 @pages_bp.route("/<pid>/<price>/", methods=["GET"])
@@ -74,10 +72,16 @@ def special_deals() -> GetProductsDealsResponse:
     deals = handler_prod._special_deals()
     if "user" in session:
         user_info = session.get("user")
-        return render_template(
-            "deals.html", products=deals, userinfo=user_info
-        )
+        return render_template("deals.html", products=deals, userinfo=user_info)
     return render_template("deals.html", products=deals)
+
+
+@pages_bp.route("/game")
+def game():
+    if "user" in session:
+        user_info = session.get("user")
+        return render_template("game.html", userinfo=user_info)
+    return render_template("game.html")
 
 
 # Admin Module to be completed

@@ -158,7 +158,7 @@ async function specialDeals() {
 
 }
 
-function confirm() {
+function confirmProduct() {
     let tel = document.getElementById("aux_tel").value;
     let email = document.getElementById("aux_email").value;
     let userid = document.getElementById("userid").value;
@@ -185,7 +185,7 @@ function confirm() {
                         return redirect("/");
                     } else {
 
-                        return ($("#info2").html("<strong>Wrong!</strong> " + " Failed Operation!"));
+                        return ($("#info").html("<strong>Wrong!</strong> " + " Failed Operation!"));
                     }
                 });
 
@@ -208,12 +208,12 @@ async function login() {
                 console.log(res);
             } else {
 
-                return ($("#info2").html("<strong>Wrong!</strong> " + " Invalid Credentials!"));
+                return ($("#info").html("<strong>Wrong!</strong> " + " Invalid Credentials!"));
             }
         });
     } else {
 
-        return ($("#info2").html("<strong>Wrong!</strong> " + " Invalid letters for username!"));
+        return ($("#info").html("<strong>Wrong!</strong> " + " Invalid letters for username!"));
     }
 
 }
@@ -249,17 +249,17 @@ async function signUP() {
                 timer: 1200,
             });
 
-            $("#info2").empty();
+            $("#info").empty();
             hide_add_entry("add_entry");
             return true;
 
         } else if (res["success"] === false) {
 
-            return ($("#info2").html("Email/Username already registered"));
+            return ($("#info").html("Email/Username already registered"));
 
         } else {
 
-            return ($("#info2").html("Couldnt create a user!"));
+            return ($("#info").html("Couldnt create a user!"));
         }
 
     }
@@ -399,21 +399,21 @@ function is_valid_Email(email) {
 
 function is_Input_Error(name, email = "", password = "", password_ = "") {
     if (name.length == 0) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Empty username!");
+        $("#info").html("<strong>Wrong!</strong> " + " Empty username!");
     }
     else if (password !== password_) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Invalid Credentials.Password mismatch!");
+        $("#info").html("<strong>Wrong!</strong> " + " Invalid Credentials.Password mismatch!");
     }
     else if (email.length == 0) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Empty email field!");
+        $("#info").html("<strong>Wrong!</strong> " + " Empty email field!");
     }
     // check for valid email
     else if (email.length > 0 && !is_valid_Email(email)) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Invalid email address!");
+        $("#info").html("<strong>Wrong!</strong> " + " Invalid email address!");
     }
     // check for valid letters
     else if (name.length > 0 && !isUserNameValid(name)) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Invalid letters for username!");
+        $("#info").html("<strong>Wrong!</strong> " + " Invalid letters for username!");
     }
     // no error
     else {
@@ -423,18 +423,18 @@ function is_Input_Error(name, email = "", password = "", password_ = "") {
 }
 function email_telephone_Error(email, tel) {
     if (tel.length == 0) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Empty telephone field!");
+        $("#info").html("<strong>Wrong!</strong> " + " Empty telephone field!");
     }
     else if (email.length == 0) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Empty email field!");
+        $("#info").html("<strong>Wrong!</strong> " + " Empty email field!");
     }
     // check for valid email
     else if (email.length > 0 && !is_valid_Email(email)) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Invalid email address!");
+        $("#info").html("<strong>Wrong!</strong> " + " Invalid email address!");
     }
     // check for valid telephone
     else if (tel.length > 0 && !validatePhoneNumber(tel)) {
-        $("#info2").html("<strong>Wrong!</strong> " + " Invalid letters for telephone!");
+        $("#info").html("<strong>Wrong!</strong> " + " Invalid letters for telephone!");
     }
     // no error
     else {

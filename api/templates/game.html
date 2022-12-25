@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="startbutton">Start game</div>
+<div id="gamestat">
+    <div id="player1"><span>Player 1:</span>&nbsp;<span class="score">0</span></div>
+    <div id="stat">
+        <span id="time">00:00</span><br />
+        <span id="flips">0 flips</span><br />
+        <span id="playerWrapper"><span id="player"></span>&nbsp;(<span id="clicks"></span>)</span>
+    </div>
+    <div id="player2"><span>Player 2:</span>&nbsp;<span class="score">0</span></div>
+</div>
+<div id="cardboard"></div>
+{% endblock %}

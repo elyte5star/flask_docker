@@ -39,7 +39,8 @@ body {
     margin: 10px;
 }
 
-#info2 {
+
+#info {
     color: red;
     margin: 10px;
 }
@@ -54,19 +55,12 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: Tangerine, sans-serif;
+    /* font-family: Tangerine, sans-serif; */
     text-shadow: 4px 4px 4px #aaa;
 }
 
 
 
-
-img.banner {
-    border-top: 5px solid yellowgreen;
-    border-bottom: 5px solid yellowgreen;
-    width: 100%;
-
-}
 
 
 img.google {
@@ -168,6 +162,20 @@ img.google {
     background-color: white;
 }
 
+
+
+
+.fa-search,
+.fa-map-marker,
+.fa-gamepad,
+.fa-gift,
+.fa-car,
+.fa-bed,
+.fa-newspaper-o {
+    color: #3299BB;
+    text-shadow: 4px 4px 4px #aaa;
+}
+
 #icons {
     border: 5px solid #ececec;
     margin: 40px;
@@ -210,7 +218,7 @@ img.google {
     border: 5px solid #ececec;
 }
 
-
+/** Main content **/
 main {
     overflow: auto;
     position: relative;
@@ -233,6 +241,7 @@ a {
     color: #3299BB;
 }
 
+/** Header **/
 header {
     height: 40px;
     position: relative;
@@ -246,6 +255,8 @@ header {
     overflow: visible;
 }
 
+
+/** Navigation **/
 nav {
     position: absolute;
     height: 40px;
@@ -279,6 +290,8 @@ nav a {
     text-decoration: none;
 }
 
+
+/** product **/
 .prod_left {
     width: 200px;
     float: left;
@@ -358,19 +371,6 @@ label {
     background-color: #ececec;
 }
 
-footer .con {
-    font-size: 1.0em;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #424242;
-}
-
-
-/** product **/
-
 .prod_order {
     position: absolute;
     bottom: 5px;
@@ -391,13 +391,98 @@ form input[type="submit"] {
     margin-right: auto;
 }
 
-.fa-search,
-.fa-map-marker,
-.fa-gamepad,
-.fa-gift,
-.fa-car,
-.fa-bed,
-.fa-newspaper-o {
-    color: #3299BB;
-    text-shadow: 4px 4px 4px #aaa;
+/*  Game board and cards */
+
+#startbutton {
+    border: 1px solid black;
+    width: 100px;
+    margin: 100px auto;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* board and cards */
+
+#cardboard {
+    overflow: auto;
+    padding: 10px;
+    background-color: #ececec;
+    margin: 0 auto;
+    display: none;
+}
+
+.clearleft {
+    clear: left;
+}
+
+.card {
+    width: 100px;
+    height: 120px;
+    float: left;
+    position: relative;
+    margin: 10px;
+	transition: 1s;
+	transform-style: preserve-3d;
+}
+
+.card div {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border: 3px solid #73AD21;
+    border-radius: 10px;
+}
+
+.card img {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20%;
+}
+
+.card div.back {
+    background-color: #91d52a;
+	backface-visibility: hidden;
+	left: -6px;
+}
+
+.card div.front {
+    background-color: white;
+    border: 3px solid white;
+	backface-visibility: hidden;
+	transform: rotateY(180deg);
+}
+
+/* gamestat */
+
+#gamestat {
+    height: 60px;
+    margin: 20px;
+    display: none;
+}
+
+#gamestat div {
+    width: 33%;
+    float: left;
+}
+
+.score {
+    border: 1px solid black;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0.2em;
+}
+
+#player2 {
+    text-align: right;
+}
+
+#stat {
+    text-align: center;
+}
+
+.current-player {
+    border-bottom: 4px solid #FF6633;  /* Nice orange */;
 }
