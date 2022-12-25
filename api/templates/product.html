@@ -16,8 +16,8 @@
             <form action="{{ url_for("pages_bp.create_order") }}" method="POST">
                 <input type="hidden" name="pid" value="{{ details['pid'] }}" />
                 <input type="hidden" name="unit_price" value="{{ price if price else details['price'] }}" />
-                <label id="lb4">Quantity(multiples of 5):&nbsp
-                    <input type="number" name="volume" id="num_items" placeholder="e.g 5,10" step="5" min="5" value="5"></label>
+                <label id="lb4">Quantity(multiples of 2):&nbsp
+                    <input type="number" name="volume" id="num_items" placeholder="e.g 2,4" step="2" min="2" value="2"></label>
                 <input class="form-btn" type="submit" value="Create Order" id="add_p">
             </form>
         </div>

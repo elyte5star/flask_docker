@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>BOOKING SITE</title>
+    <title>E-MARKET</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css" />
     <!-- jQuery library -->
@@ -14,13 +14,15 @@
     <!-- JS file -->
     <script src="/static/scripts.js"></script>
     <!-- Awesome Font -->
-    <link rel="stylesheet" href="/static/assets/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/static/assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
     <link href="/static/assets/bootstrap-5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Google Auth -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <!-- Bootstrap Datatable -->
     <link rel="stylesheet" type="text/css" href="/static/assets/DataTables/datatables.min.css" />
+    <!--   Core JS Files   -->
     <script type="text/javascript" src="/static/assets/DataTables/datatables.min.js"></script>
     <!-- Chart.js load-->
     <script src="/static/assets/chart.js/dist/chart.umd.js"></script>
@@ -29,15 +31,16 @@
 <body>
     {% if userinfo %}
     <header>
-        <div id="logo">
-            <h1><a href="/">e-Market</a></h1>
+        <div id="search">
+            <h1><a href="javascript:void(0)"><i class="fa fa-search"></i><input type="text" name="search"
+                        id="search-icon" size="20" placeholder="Search" /></a></h1>
         </div>
         <!-- Navigation bar -->
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/deals">Special deals</a></li>
-                {% if 'elyte' in userinfo['username'] %}
+                {% if userinfo['username']=='elyte' %}
                 <li><a href="/admin">Admin module</a></li>
                 {% endif %}
                 <li><a href="javascript:void(0)">Signed in as {{ userinfo['username'] }}</a></li>
@@ -48,8 +51,9 @@
     </header>
     {% else %}
     <header>
-        <div id="logo">
-            <h1><a href="/">e-Market</a></h1>
+        <div id="search">
+            <h1><a href="javascript:void(0)"><i class="fa fa-search"></i><input type="text" name="search"
+                        id="search-icon" size="20" placeholder="Search" /></a></h1>
         </div>
         <nav>
             <ul>
@@ -61,34 +65,36 @@
     </header>
 
     {% endif %}
+    <h1 id="welcome">Welcome to e-Market</span></h1>
+    <!-- Sub content Icons-->
+    <div id="icons" class="icons">
+        <div class="icon-div"><a href="javascript:void(0)"><i class="fa fa-map-marker"></i><span
+                    class="icon-text">Map</span></a>
+        </div>
+        <div class="icon-div"><a href="javascript:void(0)"><i class="fa fa-gamepad"></i><span
+                    class="icon-text">Games</span></a>
+        </div>
+        <div class="icon-div"><a href="javascript:void(0)"><i class="fa fa-gift"></i><span
+                    class="icon-text">Gift</span></a>
+        </div>
+        <div class="icon-div"><a href="javascript:void(0)"><i class="fa fa-car"></i><span class="icon-text" ">Automobile</span></a>
+        </div>
+        <div class=" icon-div"><a href=" javascript:void(0)"><i class="fa fa-bed"></i><span
+                            class="icon-text">Hotels</span></a>
+        </div>
+        <div class="icon-div"><a href="javascript:void(0)"><i class="fa fa-newspaper-o"></i><span
+                    class="icon-text">News</span></a>
+        </div>
+    </div>
     <!-- Main content -->
     <main class="container">
-        <h1 id="info">Welcome<span id="user_id"></span></h1>
-        <!-- <div>
-            <a href="javascript:void(0)"><i class="fa fa-map-marker" aria-hidden="true" style="font-size:60px;"></i>
-            <a href="javascript:void(0)"><i class="fa fa-gamepad" aria-hidden="true" style="font-size:60px;"></i>
-            <a href="javascript:void(0)"><i class="fa fa-gift" aria-hidden="true"
-                            style="font-size:60px;"></i>
-            <a href="javascript:void(0)"><i class="fa fa-car" aria-hidden="true"
-                                style="font-size:60px;"></i>
-            <a href="javascript:void(0)"><i class="fa fa-bed" aria-hidden="true"
-                                    style="font-size:60px;"></i>
-            <a href="javascript:void(0)"><i class="fa fa-newspaper-o" aria-hidden="true"
-                                        style="font-size:60px;"></i>
-        </div> -->
         <!--<img src="/static/images/tech.jpeg" alt="Tech" class="banner" /> -->
-
         {% block content %}
 
         {% endblock %}
 
     </main>
-
-
-    {# --- Footer --- #}
-
-    <div class="con" id="foot"><span class="strong">Customer Service: Telephone:</span> | +4740978057 | Email: <a
-            href="mailto:checkuti@gmail.com">checkuti@gmail.com</a></div>
+   
     <script src="/static/assets/bootstrap-5.0.2/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
 </body>
 
