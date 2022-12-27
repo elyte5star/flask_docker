@@ -5,6 +5,7 @@ from modules.schemas.responses.users import (
     GetUserResponse,
     GetUsersResponse,
 )
+
 from flask_pydantic import validate
 
 users_bp = Blueprint("users_bp", __name__, url_prefix="")
@@ -12,12 +13,13 @@ users_bp = Blueprint("users_bp", __name__, url_prefix="")
 
 @users_bp.route("/signup", methods=["POST"])
 @validate()
-def create_user(user_data: CreateUserRequest) -> CreateUserResponse:
-    return handler_user.create_user(
+def create_user(body: CreateUserRequest) -> CreateUserResponse:
+    return handler_user._create_user(
         CreateUserRequest(
-            username=user_data.username,
-            email=user_data.email,
-            password=user_data.password,
+            username=body.username,
+            email=body.email,
+            password=body.password,
+            telephone=body.telephone,
         )
     )
 

@@ -8,7 +8,8 @@ $(document).ready(function () {
 
 
 
-});
+})
+
 function handleErrors(response) {
     console.log(response.status);
     if (response.redirected) {
@@ -43,7 +44,7 @@ async function auxPost(url = "", data = {}) {
         },
         body: JSON.stringify(data),
     };
-    const response = await fetch(url, options);
+    const response = await fetch(url, options).then(handleErrors);
     return response.json();
 }
 
@@ -73,7 +74,7 @@ async function _getData(url = "", data = {}) {
 
         },
     };
-    const response = await fetch(url, options);
+    const response = await fetch(url, options).then(handleErrors);
     return response.json();
 }
 
@@ -217,6 +218,36 @@ async function login() {
     }
 
 }
+
+/* Google Auth functions */
+function getGoogleToken() {
+    let clientId = document.getElementById("gid").value;
+    google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleCredentialResponse,
+        prompt_parent_id: "g_id"
+
+    });
+
+    google.accounts.id.prompt();
+}
+
+async function handleCredentialResponse(response) {
+    const responsePayload = decodeJwtResponse(response.credential);
+    let data = { "username": responsePayload.given_name, "email": responsePayload.email };
+    auxPost("./auth/google", data).then((response_data) => {
+        if (response_data['success'] === true) {
+            let res = response_data["token_data"];
+            localStorage.setItem('token', res['access_token']);
+            window.open(res['host_url'], "_self");
+        } else {
+
+            return ($("#info").html("<strong>Wrong!</strong> " + " Invalid Credentials!"));
+        }
+    });
+
+}
+
 async function logout() {
     getData("/logout").then((result) => {
         if (result["success"] === true) {
@@ -234,41 +265,26 @@ async function signUP() {
     let pass = $("#pass").val().trim();
     let pass_ = $("#pass_").val().trim();
     let email = $("#email_").val().trim();
-
-    if (!is_Input_Error(username_, email, pass, pass_)) {
-        let obj = { "username": username_, "email": email, "password": pass };
-        const res = await auxPost('./users/signup');
-
-        if (res["username"]) {
-
+    let tel = $("#tel").val().trim();
+    if (!is_Input_Error(username_, email, pass, pass_, tel)) {
+        let obj = { "username": username_, "email": email, "password": pass, "telephone": tel };
+        const res = await auxPost('./users/signup', obj);
+        if (res["success"] === true) {
             Swal.fire({
                 icon: "success",
                 timerProgressBar: true,
-                title: res["username"] + " has been created!",
+                title: "User with ID " + res["userid"] + " has been created!",
                 showConfirmButton: false,
                 timer: 1200,
             });
-
             $("#info").empty();
             hide_add_entry("add_entry");
-            return true;
-
-        } else if (res["success"] === false) {
-
-            return ($("#info").html("Email/Username already registered"));
 
         } else {
-
-            return ($("#info").html("Couldnt create a user!"));
+            return ($("#info").html("Email/Username already registered"));
         }
-
     }
-
-
 }
-
-
-
 
 /* Admin functions */
 async function getOrders() {
@@ -347,6 +363,16 @@ function redirect(path_string) {
 }
 
 
+function decodeJwtResponse(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+}
+
 function isUserNameValid(username) {
     /* 
       Usernames can only have: 
@@ -381,9 +407,11 @@ function show_add_entry(id) {
     element.style.display = "";
 }
 
-function validatePhoneNumber(input_str) {
-    var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-    return re.test(input_str);
+
+function isValidTel(tel) {
+    // check for allowed characters using a regular expression
+    var re = /^[0-9()+\-\s]*$/
+    return re.test(tel);
 }
 
 function is_valid_letter(name) {
@@ -397,15 +425,27 @@ function is_valid_Email(email) {
     );
 }
 
-function is_Input_Error(name, email = "", password = "", password_ = "") {
+function is_Input_Error(name, email, password, password_, tel) {
     if (name.length == 0) {
-        $("#info").html("<strong>Wrong!</strong> " + " Empty username!");
-    }
-    else if (password !== password_) {
-        $("#info").html("<strong>Wrong!</strong> " + " Invalid Credentials.Password mismatch!");
+        return ($("#info").html("<strong>Wrong!</strong> " + " Empty username!"));
     }
     else if (email.length == 0) {
-        $("#info").html("<strong>Wrong!</strong> " + " Empty email field!");
+        return ($("#info").html("<strong>Wrong!</strong> " + " Empty email field!"));
+    }
+    else if (tel.length == 0) {
+
+        return ($("#info").html("<strong>Wrong!</strong> " + " Empty Telephone field!"));
+    }
+    else if (password.length == 0 || password_.length == 0) {
+        $("#info").html("<strong>Wrong!</strong> " + " Empty Password Field!");
+    }
+    else if (password !== password_) {
+        return ($("#info").html("<strong>Wrong!</strong> " + " Invalid Credentials.Password mismatch!"));
+    }
+    
+    // check for valid telephone
+    else if (tel.length > 0 && !isValidTel(tel)) {
+        return ($("#info").html("<strong>Wrong!</strong> " + " Invalid letters for telephone!"));
     }
     // check for valid email
     else if (email.length > 0 && !is_valid_Email(email)) {
@@ -413,7 +453,7 @@ function is_Input_Error(name, email = "", password = "", password_ = "") {
     }
     // check for valid letters
     else if (name.length > 0 && !isUserNameValid(name)) {
-        $("#info").html("<strong>Wrong!</strong> " + " Invalid letters for username!");
+        return ($("#info").html("<strong>Wrong!</strong> " + " Invalid letters for username!"));
     }
     // no error
     else {
@@ -422,19 +462,19 @@ function is_Input_Error(name, email = "", password = "", password_ = "") {
     return true;
 }
 function email_telephone_Error(email, tel) {
-    if (tel.length == 0) {
-        $("#info").html("<strong>Wrong!</strong> " + " Empty telephone field!");
+    if (email.length == 0) {
+        return ($("#info").html("<strong>Wrong!</strong> " + " Empty email field!"));
     }
-    else if (email.length == 0) {
-        $("#info").html("<strong>Wrong!</strong> " + " Empty email field!");
+    else if (tel.length == 0) {
+        return ($("#info").html("<strong>Wrong!</strong> " + " Empty telephone field!"));
     }
     // check for valid email
     else if (email.length > 0 && !is_valid_Email(email)) {
-        $("#info").html("<strong>Wrong!</strong> " + " Invalid email address!");
+        return ($("#info").html("<strong>Wrong!</strong> " + " Invalid email address!"));
     }
     // check for valid telephone
-    else if (tel.length > 0 && !validatePhoneNumber(tel)) {
-        $("#info").html("<strong>Wrong!</strong> " + " Invalid letters for telephone!");
+    else if (tel.length > 0 && !isValidTel(tel)) {
+        return ($("#info").html("<strong>Wrong!</strong> " + " Invalid letters for telephone!"));
     }
     // no error
     else {

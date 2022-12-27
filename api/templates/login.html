@@ -4,6 +4,7 @@
 <!-- Login panel -->
 <div id="login_access">
     <h2>Login</h2>
+    <input type="hidden" id="gid" name="gid" value="{{ google_id }}" />
     <table>
         <tr>
             <td>Username :</td>
@@ -29,14 +30,14 @@
         </tr>
         <tr>
             <td> Login :</td>
-            <td><a href="javascript:void(0)" onclick="login();"><i class="fa fa-sign-in" aria-hidden="true"
-                      style="font-size:60px;"></i></a></td>
+            <td><a href="javascript:void(0)" onclick="login();"><i class="fa fa-sign-in"
+                        style="font-size:60px;"></i></a></td>
         </tr>
     </table>
 </div>
 <!-- Customer Service -->
 <div id="customer" class="customer"><span class="strong">Customer Service: Telephone:</span> | +4740978057 | Email: <a
-    href="mailto:checkuti@gmail.com">checkuti@gmail.com</a>
+        href="mailto:checkuti@gmail.com">checkuti@gmail.com</a>
 </div>
 
 <!-- Create user account -->
@@ -44,8 +45,7 @@
     <div class="close">
         <a href="javascript:void(0)" onclick="hide_add_entry('add_entry');"><i class="fa fa-remove"></i></a>
     </div>
-    <h2>Create user</h2>
-
+    <h2>Please Create A User Account</h2>
     <table>
         <tr>
             <td>Username:</td>
@@ -74,9 +74,16 @@
                 <input type="password" name="pass_" id="pass_" size="20" minlength="4" required>
             </td>
         </tr>
+
+        <tr>
+            <td>Telephone:</td>
+            <td>
+                <input type="text" name="tel" id="tel" size="20" minlength="6" required>
+            </td>
+        </tr>
         <tr>
             <td>
-                <input id="b1" type="button" value="Add person" onclick="signUP();" style="width: 100%" />
+                <input id="b1" type="button" value="Create Account" onclick="signUP();" style="width: 100%" />
             </td>
             <td>
                 <input id="b2" type="button" value="Cancel" onclick="hide_add_entry('add_entry');"
@@ -91,6 +98,6 @@
 
 <!-- the button to Sign up -->
 <button class="form-btn" onclick="show_add_entry('add_entry');" type="button" id="add_p">Please, create a
-    User Acount.</button>
+    User Account.</button>
 </div>
 {% endblock %}

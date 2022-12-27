@@ -5,10 +5,7 @@ from modules.schemas.responses.base_response import BaseResponse
 
 
 class CreateUserResponse(BaseResponse):
-    username: str = ""
     userid: str = ""
-    email: EmailStr = None
-    created_at: datetime = None
 
 
 class GetUserResponse(BaseResponse):

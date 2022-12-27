@@ -5,13 +5,12 @@ from modules.schemas.responses.users import (
     GetUsersResponse,
 )
 from modules.database.mongodb.base import Database
-from flask import jsonify, make_response
 from modules.auth.auth_bearer import security
 
 
 class Users(Database):
-    async def create_user(self, user_data: CreateUserRequest) -> CreateUserResponse:
-        user_dict = await self.admin_db.users.find_one(
+    def _create_user(self, user_data: CreateUserRequest) -> CreateUserResponse:
+        user_dict = self.admin_db.users.find_one(
             {
                 "$or": [
                     {"email": user_data.email},
@@ -26,27 +25,21 @@ class Users(Database):
         payload = {
             "username": user_data.username,
             "email": user_data.email,
-            "password": user_data.password,
+            "password": self.hash_password(
+                user_data.password, self.cf.rounds, self.cf.coding
+            ),
             "created_at": self.time_now(),
             "admin": False,
             "active": True,
-            "discount": 0.05,
+            "normal_discount": 0.05,
+            "telephone": user_data.telephone,
         }
 
-        if payload:
-            hashed_password = self.hash_password(
-                payload["password"], self.cf.rounds, self.cf.coding
-            )
-            payload["password"] = hashed_password
-            result = await self.admin_db.users.insert_one(payload)
-            res = {
-                "username": payload["username"],
-                "userid": str(result.inserted_id),
-                "email": payload["email"],
-                "created_at": payload["created_at"],
-            }
-
-            return res
+        result = self.admin_db.users.insert_one(payload)
+        return CreateUserResponse(
+            userid=str(result.inserted_id),
+            message=f"User with {user_data.email}/{user_data.username} created!",
+        )
 
     @security.login_required
     def get_users(self) -> GetUsersResponse:

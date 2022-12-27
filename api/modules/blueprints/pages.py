@@ -13,6 +13,7 @@ from flask_pydantic import validate
 from modules.schemas.requests.order import CreateOrder
 from modules.schemas.responses.order import CreateOrderResponse
 
+from modules.auth.auth_bearer import cfg
 
 pages_bp = Blueprint(
     "pages_bp",
@@ -62,7 +63,7 @@ def create_order(form: CreateOrder) -> CreateOrderResponse:
 
 @pages_bp.route("/login")
 def login():
-    return render_template("login.html")
+    return render_template("login.html", google_id=cfg.google_client_id)
 
 
 # Special deals

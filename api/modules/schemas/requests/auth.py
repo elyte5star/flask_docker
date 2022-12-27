@@ -7,6 +7,11 @@ class LoginDataRequest(BaseModel):
     password: str
 
 
+class GoogleLoginDataRequest(BaseModel):
+    username: str
+    email: str
+
+
 class JWTcredentials(BaseModel):
     userid: str
     email: str

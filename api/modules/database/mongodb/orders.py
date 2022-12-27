@@ -85,24 +85,10 @@ class Order(Discount):
         if confirm_oder:
             conf_dict = confirm_oder.dict()
             conf_dict["created_at"] = self.time_now()
-            # Clients without account
-            if not session.get("user"):
-                result = self.admin_db.orders.insert_one(conf_dict)
-                model = ConfirmOrderResponse(
-                    message="Order Registered!", oid=str(result.inserted_id)
-                )
-                return model.dict()
-            else:
-                # Logged in clients
-                user_dict = session.get("user")
-                conf_dict["userid"] = user_dict["userid"]
-                conf_dict["email"] = user_dict["email"]
-                conf_dict["telephone"] = user_dict["telephone"]
-                result = self.admin_db.orders.insert_one(conf_dict)
-                model = ConfirmOrderResponse(
-                    message="Order Registered!", oid=str(result.inserted_id)
-                )
-                return model.dict()
+            result = self.admin_db.orders.insert_one(conf_dict)
+            return ConfirmOrderResponse(
+                message="Order Registered!", oid=str(result.inserted_id)
+            )
 
         return self.bad_request("Can't confirm the order!")
 

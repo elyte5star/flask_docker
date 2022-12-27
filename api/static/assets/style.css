@@ -64,8 +64,8 @@ h4 {
 
 
 img.google {
-    border-top: 5px solid yellowgreen;
-    border-bottom: 5px solid yellowgreen;
+    border-top: 5px solid #3299BB;
+    border-bottom: 5px solid #3299BB;
     width: 100px;
     margin-bottom: 3px;
     margin-right: 5px;
@@ -171,7 +171,9 @@ img.google {
 .fa-gift,
 .fa-car,
 .fa-bed,
-.fa-newspaper-o {
+.fa-newspaper-o,
+.fa-shopping-cart,
+.fa-sign-in {
     color: #3299BB;
     text-shadow: 4px 4px 4px #aaa;
 }
@@ -423,8 +425,8 @@ form input[type="submit"] {
     float: left;
     position: relative;
     margin: 10px;
-	transition: 1s;
-	transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
 }
 
 .card div {
@@ -444,15 +446,15 @@ form input[type="submit"] {
 
 .card div.back {
     background-color: #91d52a;
-	backface-visibility: hidden;
-	left: -6px;
+    backface-visibility: hidden;
+    left: -6px;
 }
 
 .card div.front {
     background-color: white;
     border: 3px solid white;
-	backface-visibility: hidden;
-	transform: rotateY(180deg);
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
 }
 
 /* gamestat */
@@ -484,5 +486,7 @@ form input[type="submit"] {
 }
 
 .current-player {
-    border-bottom: 4px solid #FF6633;  /* Nice orange */;
+    border-bottom: 4px solid #FF6633;
+    /* Nice orange */
+    ;
 }

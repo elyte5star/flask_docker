@@ -271,7 +271,11 @@ $(document).ready(function () {
             }
 
             setTimeout(function () {  // I realized that alert appears before last card ends to flip ;P ...
+
+
                 var answer = confirm("After " + time_taken + status + " Do you want to play again?");
+
+                
                 if (answer) {
 
                     // Clean everything from before:
