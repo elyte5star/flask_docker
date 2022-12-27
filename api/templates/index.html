@@ -3,9 +3,10 @@
 <div id="index">
   <h1>Products</h1>
   {% for product in products.data %}
-  <article class="framed column">
+  <article class="framed column" id="{{ product.pid }}">
     <div class="prod_left">
-      <img src="/static/images/products/{{ product['image'] }}" alt="{{ product['name'] }}" width="200px" height="200px" />
+      <img src="/static/images/products/{{ product['image'] }}" alt="{{ product['name'] }}" width="200px"
+        height="200px" />
       <div class="place">{{ product['location'] }}</div>
     </div>
 

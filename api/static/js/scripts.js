@@ -1,4 +1,18 @@
+var productsList = new Array();
+
+class Product {
+    constructor(name, price,pid) {
+        this.name = name;
+        this.price = price;
+        this.checkString = checkString;
+        this.pid = pid
+
+    }
+}
+
+
 $(document).ready(function () {
+    products();
     $('#popularProducts').DataTable({
         "ordering": false,
         "paging": false,
@@ -133,17 +147,36 @@ function display_Entry(index) {
 
 
 async function products() {
-    const returned_result = await _getData("./products").then((result) => {
+    const returned_result = await _getData("./products/all").then((result) => {
         if (result['success'] === true) {
             result.data.forEach(function (item) {
-                console.log(item);
-
+                let product = new Product(item["name"], item["price"], item["pid"])
+                productsList.push(product)
             });
-
+            console.log(productsList);
         }
 
     });
 
+}
+/* Search functions */
+function checkString(search_string) {
+    search_string = search_string.toLowerCase();
+    return (this.name.toLowerCase().indexOf(search_string) > -1)
+        || (this.price.toString().indexOf(search_string) > -1)
+}
+
+
+function searchEntries() {
+    let search_str = document.getElementById("search-icon").value;
+    productsList.forEach(function (item) {
+        let article = document.getElementById(item["pid"]);
+        if (search_str.length > 0 && !item.checkString(search_str))
+            article.style.display = "none";
+        else {
+            article.style.display = "";
+        }
+    });
 }
 
 
@@ -181,7 +214,9 @@ function confirmProduct() {
                         Swal.fire(
                             'Confirmed!',
                             'Your Order is confirmed.',
-                            'success'
+                            'success',
+                            false,
+                            1500,
                         )
                         return redirect("/");
                     } else {
@@ -275,7 +310,7 @@ async function signUP() {
                 timerProgressBar: true,
                 title: "User with ID " + res["userid"] + " has been created!",
                 showConfirmButton: false,
-                timer: 1200,
+                timer: 1500,
             });
             $("#info").empty();
             hide_add_entry("add_entry");
@@ -285,6 +320,12 @@ async function signUP() {
         }
     }
 }
+
+
+
+
+
+
 
 /* Admin functions */
 async function getOrders() {
@@ -442,7 +483,7 @@ function is_Input_Error(name, email, password, password_, tel) {
     else if (password !== password_) {
         return ($("#info").html("<strong>Wrong!</strong> " + " Invalid Credentials.Password mismatch!"));
     }
-    
+
     // check for valid telephone
     else if (tel.length > 0 && !isValidTel(tel)) {
         return ($("#info").html("<strong>Wrong!</strong> " + " Invalid letters for telephone!"));

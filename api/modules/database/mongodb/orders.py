@@ -54,9 +54,10 @@ class Order(Discount):
             # check if the client is logged in
             if "user" in session:
                 user_dict = session.get("user")
-                discount = user_dict["discount"]
                 _total_price = unit_price * int(volume)
-                total_price = self.calculate_discount(_total_price, discount)
+                total_price = self.calculate_discount(
+                    _total_price, user_dict["discount"]
+                )
                 model = CreateOrderResponse(
                     message="Order created",
                     sale_price=total_price,

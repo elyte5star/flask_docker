@@ -32,8 +32,8 @@
     {% if userinfo %}
     <header>
         <div id="search">
-            <h1><a href="javascript:void(0)"><i class="fa fa-search"></i><input type="text" name="search"
-                        id="search-icon" size="20" placeholder="Search" /></a></h1>
+            <h1><h1><i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
+                placeholder="Search" onkeyup="searchEntries();" /></h1>
         </div>
         <!-- Navigation bar -->
         <nav>
@@ -52,8 +52,8 @@
     {% else %}
     <header>
         <div id="search">
-            <h1><a href="javascript:void(0)"><i class="fa fa-search"></i><input type="text" name="search"
-                        id="search-icon" size="20" placeholder="Search" /></a></h1>
+            <h1><i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
+                    placeholder="Search" onkeyup="searchEntries();" /></h1>
         </div>
         <nav>
             <ul>
@@ -71,8 +71,7 @@
         <div class="icon-div"><a href="javascript:void(0)"><i class="fa fa-map-marker"></i><span
                     class="icon-text">Map</span></a>
         </div>
-        <div class="icon-div"><a href="/game"><i class="fa fa-gamepad"></i><span
-                    class="icon-text">Games</span></a>
+        <div class="icon-div"><a href="/game"><i class="fa fa-gamepad"></i><span class="icon-text">Games</span></a>
         </div>
         <div class="icon-div"><a href="javascript:void(0)"><i class="fa fa-gift"></i><span
                     class="icon-text">Gift</span></a>

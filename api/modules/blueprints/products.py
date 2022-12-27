@@ -20,7 +20,7 @@ products_bp = Blueprint(
 )
 
 
-@products_bp.route("/", methods=["GET"])
+@products_bp.route("/all", methods=["GET"])
 def list_of_products() -> GetProductsResponse:
     return handler_prod.get_all_products()
 
