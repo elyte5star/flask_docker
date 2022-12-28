@@ -1,6 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Sevillana);
-@import url(http://fonts.googleapis.com/css?family=Raleway);
-@import url(http://fonts.googleapis.com/css?family=Tangerine);
+
+@import "ol/ol.css";
 
 html {
     position: relative;
@@ -393,6 +392,16 @@ form input[type="submit"] {
     margin-right: auto;
 }
 
+
+/* map */
+#map {
+    width: 100%;
+    height: 800px;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
 /*  Game board and cards */
 
 #startbutton {
@@ -456,6 +465,8 @@ form input[type="submit"] {
     backface-visibility: hidden;
     transform: rotateY(180deg);
 }
+
+
 
 /* gamestat */
 

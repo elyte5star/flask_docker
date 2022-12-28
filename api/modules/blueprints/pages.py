@@ -85,11 +85,20 @@ def game():
     return render_template("game.html")
 
 
+# Map using Open layer
+@pages_bp.route("/map")
+def map():
+    if "user" in session:
+        user_info = session.get("user")
+        return render_template("map.html", userinfo=user_info)
+    return render_template("map.html")
+
+
 # Admin Module to be completed
 @pages_bp.route("/admin")
 def admin_module():
     if not session.get("user") and request.endpoint != "login":
-        return redirect(url_for("pages_bp.login"))
+        return render_template("admin.html")  # redirect(url_for("pages_bp.login"))
     user_info = session.get("user")
     return render_template("admin.html", userinfo=user_info)
 
@@ -97,5 +106,6 @@ def admin_module():
 @pages_bp.route("/logout")
 @validate()
 def logout():
-    session.pop("user")
-    return BaseResponse(message="You are logged out!")
+    session["user"] = None
+    session.clear()
+    return redirect("/")  # redirect(url_for("pages_bp.login"))

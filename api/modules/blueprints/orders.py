@@ -36,6 +36,6 @@ def confirm_order(body: ConfirmOrderRequest) -> ConfirmOrderResponse:
 
 # Get Orders
 @order_bp.route("/all", methods=["GET"])
-@validate()
+@security.login_required
 def get_orders() -> GetOrderResponse:
     return handler._get_orders()

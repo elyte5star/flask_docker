@@ -1,7 +1,7 @@
 var productsList = new Array();
 
 class Product {
-    constructor(name, price,pid) {
+    constructor(name, price, pid) {
         this.name = name;
         this.price = price;
         this.checkString = checkString;
@@ -153,7 +153,6 @@ async function products() {
                 let product = new Product(item["name"], item["price"], item["pid"])
                 productsList.push(product)
             });
-            console.log(productsList);
         }
 
     });
@@ -264,7 +263,15 @@ function getGoogleToken() {
 
     });
 
-    google.accounts.id.prompt();
+    google.accounts.id.prompt((notification) => {
+        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            console.log(notification.getNotDisplayedReason());
+            return ($("#info").html("<strong>Please use another login method!</strong> " + " Google Authentication not available!"));
+        }
+    });
+}
+function onSignout() {
+    google.accounts.id.disableAutoSelect();
 }
 
 async function handleCredentialResponse(response) {
@@ -283,17 +290,6 @@ async function handleCredentialResponse(response) {
 
 }
 
-async function logout() {
-    getData("/logout").then((result) => {
-        if (result["success"] === true) {
-            localStorage.removeItem("token");
-            redirect("/");
-        } else {
-            console.log(result);
-            return false;
-        }
-    });
-}
 
 async function signUP() {
     let username_ = $("#username_").val().trim();

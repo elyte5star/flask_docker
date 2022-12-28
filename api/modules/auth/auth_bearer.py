@@ -29,13 +29,16 @@ def bad_request(message):
 def check_token(token: str):
     if token is None:
         return None
-    decoded_token = jwt.decode(token, cfg.secret_key, algorithms=[cfg.algorithm])
-    return decoded_token if decoded_token["exp"] >= time.time() else None
+    try:
+        decoded_token = jwt.decode(token, cfg.secret_key, algorithms=[cfg.algorithm])
+        return decoded_token if decoded_token["exp"] >= time.time() else None
+    except:
+        return None
 
 
 @security.verify_token
 def verify_jwt(token: str):
-    return check_token(token) if token else None
+    return check_token(token)
 
 
 @security.error_handler

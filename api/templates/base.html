@@ -14,10 +14,13 @@
     <!--   Core JS Files   -->
     <script src="/static/js/game.js"></script>
     <script src="/static/js/scripts.js"></script>
-    <!-- Awesome Font -->
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet" />
     <link rel="stylesheet" href="/static/assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
     <link href="/static/assets/bootstrap-5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link href="/static/assets/paper-dashboard-master/assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />  -->
     <!-- Google Auth -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
@@ -32,8 +35,9 @@
     {% if userinfo %}
     <header>
         <div id="search">
-            <h1><h1><i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
-                placeholder="Search" onkeyup="searchEntries();" /></h1>
+            <h1>
+                <h1><i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
+                        placeholder="Search" onkeyup="searchEntries();" /></h1>
         </div>
         <!-- Navigation bar -->
         <nav>
@@ -44,7 +48,7 @@
                 <li><a href="/admin">Admin module</a></li>
                 {% endif %}
                 <li><a href="javascript:void(0)">Signed in as {{ userinfo['username'] }}</a></li>
-                <li><a href="javascript:void(0)" onclick="return logout();">Logout</a></li>
+                <li><a href="/logout" onclick="onSignout();">Logout</a></li>
 
             </ul>
         </nav>
@@ -68,8 +72,7 @@
     <h1 id="welcome">Welcome to e-Market</span></h1>
     <!-- Sub content Icons-->
     <div id="icons" class="icons">
-        <div class="icon-div"><a href="javascript:void(0)"><i class="fa fa-map-marker"></i><span
-                    class="icon-text">Map</span></a>
+        <div class="icon-div"><a href="/map"><i class="fa fa-map-marker"></i><span class="icon-text">Map</span></a>
         </div>
         <div class="icon-div"><a href="/game"><i class="fa fa-gamepad"></i><span class="icon-text">Games</span></a>
         </div>

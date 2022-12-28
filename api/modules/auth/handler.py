@@ -81,7 +81,7 @@ class Auth(Database):
                 "email": user["email"],
                 "telephone": user["telephone"],
             }
-            
+
             return TokenResponse(
                 token_data={
                     "access_token": access_token,

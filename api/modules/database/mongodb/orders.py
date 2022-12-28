@@ -7,8 +7,6 @@ from modules.schemas.responses.order import (
     GetOrderResponse,
 )
 from flask_pydantic import validate
-from modules.auth.auth_bearer import security
-from flask import session
 from bson.objectid import ObjectId
 
 # ===================================#
@@ -93,7 +91,6 @@ class Order(Discount):
 
         return self.bad_request("Can't confirm the order!")
 
-    @security.login_required
     def _get_orders(self):
         cursor = self.admin_db.orders.find({})
         if cursor:
