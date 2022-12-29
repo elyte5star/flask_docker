@@ -41,6 +41,7 @@ token_expire_min = 10
 host_port = 3000
 google_client_id="864725361364-enrs63jgolid0jpmiffcsnj1rtadtss1.apps.googleusercontent.com"
 google_client_secret="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"
+news_api_key="8820ff85814d4e2ab94b0585d76eb209"
 
 
 

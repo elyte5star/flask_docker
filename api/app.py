@@ -1,6 +1,4 @@
 from os import path
-import time
-from jose import jwt
 from flask import Flask, send_file
 from modules.blueprints import auth, users, products, pages, orders
 from modules.database.mongodb.users import Users
@@ -14,7 +12,7 @@ from modules.blueprints.products import products_bp
 from modules.blueprints.orders import order_bp
 from modules.blueprints.pages import pages_bp
 from modules.blueprints.users import users_bp
-from flask_httpauth import HTTPTokenAuth
+from dateutil.parser import parse
 
 
 cfg = (
@@ -49,6 +47,13 @@ orders.handler = Order(cfg)
 def favicon():
     fav_path = path.join(app.static_folder, "favicon.ico")
     return send_file(fav_path)
+
+
+# custom date filter
+@app.template_filter()
+def format_datetime(value):
+    dt = parse(value)
+    return str(dt.date()) + " " + str(dt.time().replace(microsecond=0))
 
 
 app.threaded = cfg.debug

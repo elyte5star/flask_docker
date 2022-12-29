@@ -340,7 +340,14 @@ article:hover {
 }
 
 .column {
-    width: 32%;
+    width: 32%;/* set the amount of columns */
+    margin: 0.5%;
+    float: left;
+}
+
+/* News column*/
+.columnx {
+    width: 99%;/* set the amount of columns */
     margin: 0.5%;
     float: left;
 }

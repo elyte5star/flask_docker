@@ -41,6 +41,8 @@ class Config:
         # Google auth
         self.google_client_secret: str = ""
         self.google_client_id: str = ""
+        # News
+        self.news_api_key: str = ""
 
     def from_toml_file(self):
         """
@@ -71,6 +73,7 @@ class Config:
 
         self.google_client_secret = cf.api.google_client_secret
         self.google_client_id = cf.api.google_client_id
+        self.news_api_key = cf.api.news_api_key
 
         return self
 

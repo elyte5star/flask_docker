@@ -4,7 +4,6 @@ from flask import (
     session,
     request,
     redirect,
-    url_for,
 )
 from modules.auth.auth_bearer import security
 from modules.schemas.responses.base_response import BaseResponse
@@ -12,8 +11,12 @@ from modules.schemas.responses.product import GetProductsDealsResponse
 from flask_pydantic import validate
 from modules.schemas.requests.order import CreateOrder
 from modules.schemas.responses.order import CreateOrderResponse
-
+from newsapi import NewsApiClient
 from modules.auth.auth_bearer import cfg
+
+
+# https://github.com/mattlisiv/newsapi-python
+news_api = NewsApiClient(api_key=cfg.news_api_key)
 
 pages_bp = Blueprint(
     "pages_bp",
@@ -85,6 +88,15 @@ def game():
     return render_template("game.html")
 
 
+@pages_bp.route("/news")
+def news():
+    list_articles = news_api.get_top_headlines()["articles"]
+    if "user" in session:
+        user_info = session.get("user")
+        return render_template("news.html", userinfo=user_info, headlines=list_articles)
+    return render_template("news.html", headlines=list_articles)
+
+
 # Map using Open layer
 @pages_bp.route("/map")
 def map():
@@ -104,7 +116,6 @@ def admin_module():
 
 
 @pages_bp.route("/logout")
-@validate()
 def logout():
     session["user"] = None
     session.clear()
