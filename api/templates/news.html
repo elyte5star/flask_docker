@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div id="news">
-    <h1>News: Top Headlines</h1>
+    <h1>Top {{headlines|length}} News Headlines.</h1>
     {% for art in headlines %}
     <article class="framed columnx" id="{{ art['source']['name'] }}">
         <div class="prod_left">
