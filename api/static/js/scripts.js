@@ -122,28 +122,6 @@ async function putData(url = "", data = {}) {
     return response.json();
 }
 
-function display_Entry(index) {
-    return (
-        '<div class="contact_id">' +
-        "</div>\n" +
-        '<div class="contact_name">' +
-        "Name : " +
-        this.name +
-        "</div>\n" +
-        '<div class="contact_tel">' +
-        "Telephone : " +
-        this.tel +
-        "</div>\n" +
-        '<div class="contact_operations">' +
-        '<a href="javascript:void(0);" onclick="update_Entry(' +
-        index +
-        ')"><i class="fa fa-pencil-square-o"></i></a><br />' +
-        '<a href="javascript:void(0);" onclick="delete_Entry(' +
-        index +
-        ')"><i class="fa fa-trash-o"></i></a>' +
-        "</div>"
-    );
-}
 
 
 async function products() {
@@ -158,27 +136,31 @@ async function products() {
     });
 
 }
+
 /* Search functions */
-function checkString(search_string) {
-    search_string = search_string.toLowerCase();
-    return (this.name.toLowerCase().indexOf(search_string) > -1)
-        || (this.price.toString().indexOf(search_string) > -1)
+function checkString(str, ele_txt) {
+    str = str.toLowerCase();
+    return (ele_txt.toLowerCase().indexOf(str) > -1);
 }
 
+function filterEntries() {
+    let strSearch = document.getElementById("search-icon").value;
+    document.querySelectorAll("article.framed").forEach(
+        function (article_ele) {
+            let art = document.getElementById(article_ele.id);
+            let h = article_ele.querySelectorAll("h3,h4");
+            if (strSearch.length > 0 && !checkString(strSearch, h[0].innerHTML) && !checkString(strSearch, h[1].innerHTML)) {
+                art.style.display = "none";
+            } else {
+                art.style.display = "";
+               
+            }
+        })
 
-function searchEntries() {
-    let search_str = document.getElementById("search-icon").value;
-    productsList.forEach(function (item) {
-        let article = document.getElementById(item["pid"]);
-        if (search_str.length > 0 && !item.checkString(search_str))
-            article.style.display = "none";
-        else {
-            article.style.display = "";
-        }
-    });
 }
-
-
+function sortContacts() {
+    console.log("Hello");
+}
 async function specialDeals() {
     const returned_result = await _getData("./products/deals").then((result) => {
         if (result['success'] === true) {
@@ -190,7 +172,7 @@ async function specialDeals() {
     });
 
 }
-
+/* confirm purchase */
 function confirmProduct() {
     let tel = document.getElementById("aux_tel").value;
     let email = document.getElementById("aux_email").value;
@@ -229,7 +211,7 @@ function confirmProduct() {
     };
 }
 
-
+/* Login */
 async function login() {
     let userName = document.getElementById("username").value;
     let passWord = document.getElementById("password").value;
@@ -240,7 +222,7 @@ async function login() {
                 let res = response_data["token_data"];
                 localStorage.setItem('token', res['access_token']);
                 window.open(res['host_url'], "_self");
-                console.log(res);
+                
             } else {
 
                 return ($("#info").html("<strong>Wrong!</strong> " + " Invalid Credentials!"));
@@ -270,8 +252,10 @@ function getGoogleToken() {
         }
     });
 }
+
 function onSignout() {
     google.accounts.id.disableAutoSelect();
+    localStorage.removeItem("token");
 }
 
 async function handleCredentialResponse(response) {
@@ -290,7 +274,7 @@ async function handleCredentialResponse(response) {
 
 }
 
-
+/* Create new user */
 async function signUP() {
     let username_ = $("#username_").val().trim();
     let pass = $("#pass").val().trim();
@@ -399,6 +383,26 @@ function redirect(path_string) {
     window.location.replace(path_string);
 }
 
+/* Search functions */
+// function checkString(search_string) {
+//     search_string = search_string.toLowerCase();
+//     return (this.name.toLowerCase().indexOf(search_string) > -1)
+//         || (this.price.toString().indexOf(search_string) > -1)
+// }
+
+
+// function searchEntries() {
+//     let search_str = document.getElementById("search-icon").value;
+//     productsList.forEach(function (item) {
+//         let article = document.getElementById(item["pid"]);
+//         if (search_str.length > 0 && !item.checkString(search_str))
+//             article.style.display = "none";
+//         else {
+//             article.style.display = "";
+//         }
+//     });
+
+// }
 
 function decodeJwtResponse(token) {
     var base64Url = token.split('.')[1];
@@ -461,7 +465,16 @@ function is_valid_Email(email) {
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 }
-
+function make_string(length) {
+    var result = "";
+    var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 function is_Input_Error(name, email, password, password_, tel) {
     if (name.length == 0) {
         return ($("#info").html("<strong>Wrong!</strong> " + " Empty username!"));

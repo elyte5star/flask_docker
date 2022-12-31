@@ -3,7 +3,7 @@
 <div id="news">
     <h1>Top {{headlines|length}} News Headlines.</h1>
     {% for art in headlines %}
-    <article class="framed columnx" id="{{ art['source']['name'] }}">
+    <article class="framed columnx" id="{{ art.publishedAt|format_datetime }}">
         <div class="prod_left">
             <img src="{{ art['urlToImage'] }}" alt="{{ art['source']['name'] }}" width="200px"
                 height="200px" />
@@ -11,9 +11,9 @@
         </div>
 
         <div class="prod_right">
-            <h3 style="text-shadow: none;">{{ art['title'] }}</h3>
+            <h3>{{ art['title'] }}</h3>
             <p>{{ art['description'] }}</p>
-            <h4 style="text-shadow: none;">{{ art.publishedAt|format_datetime }}</h4>
+            <h4>Date:{{ art.publishedAt|format_datetime }}.</h4>
         </div>
 
         <a href="{{ art['url'] }}">

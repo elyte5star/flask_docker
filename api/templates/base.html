@@ -32,47 +32,44 @@
 </head>
 
 <body>
-    {% if userinfo %}
     <header>
-        <div id="search">
-            <h1>
-                <h1><i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
-                        placeholder="Search" onkeyup="searchEntries();" /></h1>
-        </div>
         <!-- Navigation bar -->
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/deals">Special deals</a></li>
+                {% if userinfo %}
                 {% if userinfo['username']=='elyte' %}
                 <li><a href="/admin">Admin module</a></li>
                 {% endif %}
                 <li><a href="javascript:void(0)">Signed in as {{ userinfo['username'] }}</a></li>
                 <li><a href="/logout" onclick="onSignout();">Logout</a></li>
-
-            </ul>
-        </nav>
-    </header>
-    {% else %}
-    <header>
-        <div id="search">
-            <h1><i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
-                    placeholder="Search" onkeyup="searchEntries();" /></h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/deals">Special deals</a></li>
+                {% else %}
                 <li><a href="/login">Login</a></li>
+                {% endif %}
+
             </ul>
         </nav>
     </header>
-
-    {% endif %}
+    <div id="search">
+        <h1>
+            <h1><i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
+                    placeholder="Search" onkeyup="filterEntries();" /></h1>
+    </div>
     <h1 id="welcome">Welcome to e-Market</span></h1>
+    <!-- Sort content -->
+    <div id="sort-div" class="sort-div">
+        <i class="fa fa-sort-amount-desc"></i>
+        <select name="sort" id="sort" onchange="sortContacts();">
+            <option value="h-l">Price:High-low</option>
+            <option value="l-h">Price:Low-High</option>
+            <option value="popularity">Popularity</option>
+            <option value="deals">Special Deals</option>
+        </select>
+    </div>
     <!-- Sub content Icons-->
     <div id="icons" class="icons">
-        <div class="icon-div"><a href="/map"><i class="fa fa-map-marker"></i><span class="icon-text">Map</span></a>
+        <div class="icon-div"><a href="/map"><i class="fa fa-map-marker"></i><span class="icon-text">Maps</span></a>
         </div>
         <div class="icon-div"><a href="/game"><i class="fa fa-gamepad"></i><span class="icon-text">Games</span></a>
         </div>
@@ -84,10 +81,10 @@
         <div class=" icon-div"><a href=" javascript:void(0)"><i class="fa fa-bed"></i><span
                             class="icon-text">Hotels</span></a>
         </div>
-        <div class="icon-div"><a href="/news"><i class="fa fa-newspaper-o"></i><span
-                    class="icon-text">News</span></a>
+        <div class="icon-div"><a href="/news"><i class="fa fa-newspaper-o"></i><span class="icon-text">News</span></a>
         </div>
     </div>
+
     <!-- Main content -->
     <main class="container">
         <!--<img src="/static/images/tech.jpeg" alt="Tech" class="banner" /> -->
