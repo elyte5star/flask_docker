@@ -184,7 +184,8 @@ img.google {
 .fa-bed,
 .fa-newspaper-o,
 .fa-shopping-cart,
-.fa-sign-in {
+.fa-sign-in,
+.fa-sort-amount-desc {
     color: #3299BB;
     text-shadow: 4px 4px 4px #aaa;
 }
@@ -420,6 +421,10 @@ form input[type="submit"] {
     margin-right: auto;
 }
 
+mark {
+    background: orange;
+    color: black;
+}
 
 /* map */
 #map {

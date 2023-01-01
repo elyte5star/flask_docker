@@ -4,7 +4,6 @@ class Product {
     constructor(name, price, pid) {
         this.name = name;
         this.price = price;
-        this.checkString = checkString;
         this.pid = pid
 
     }
@@ -19,8 +18,6 @@ $(document).ready(function () {
         "searching": false,
         "info": false
     });
-
-
 
 })
 
@@ -151,13 +148,40 @@ function filterEntries() {
             let h = article_ele.querySelectorAll("h3,h4");
             if (strSearch.length > 0 && !checkString(strSearch, h[0].innerHTML) && !checkString(strSearch, h[1].innerHTML)) {
                 art.style.display = "none";
+            } else if (strSearch.length == "") {
+                $("article").unmark();
+                art.style.display = "";
             } else {
                 art.style.display = "";
-               
+                mark_text();
             }
         })
 
 }
+
+function mark_text() {
+    let strSearch = document.getElementById("search-icon").value;
+    var patt = /"(.*?)"/gi;
+    var matches = new Array();
+    while ((match = patt.exec(strSearch)) !== null) {
+        matches.push(match[1]);
+    }
+    var txt = strSearch.replace(patt, "");
+    matches = matches.concat(txt.trim().split(" "));
+    matches.forEach(function (term) {
+        var regex_text = new RegExp("\\b(" + term + ")\\b", "i"); // RegExp
+        $("article.framed .prod_right h3,h4").each(function (i, e) {
+            console.log(e);
+            $(e).markRegExp(regex_text, { className: "orange", accuracy: "exactly" });
+        });
+    });
+}
+
+
+
+
+
+
 function sortContacts() {
     console.log("Hello");
 }
@@ -222,7 +246,7 @@ async function login() {
                 let res = response_data["token_data"];
                 localStorage.setItem('token', res['access_token']);
                 window.open(res['host_url'], "_self");
-                
+
             } else {
 
                 return ($("#info").html("<strong>Wrong!</strong> " + " Invalid Credentials!"));
