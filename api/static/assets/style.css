@@ -23,36 +23,202 @@ body {
     outline: 0.1rem ridge greenyellow;
     outline-offset: 0.1rem;
 }  */
+/** Header **/
+header {
+    height: 40px;
+    position: relative;
+    /* change to fixed*/
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: black;
+    margin: 0px;
+    padding: 0px;
+    overflow: visible;
+}
 
+/** Navigation **/
+nav {
+    position: absolute;
+    height: 40px;
+    right: 5%;
+    top: 0px;
+    padding: 0px;
+    margin: 0px;
+    border-right: 1px solid #E9E9E9;
+}
+
+nav ul {
+    margin-top: 0px;
+    padding-left: 10px;
+
+}
+
+nav li {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1.0em;
+    border-left: 1px solid #E9E9E9;
+
+}
+
+nav a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: lightgoldenrodyellow;
+}
+
+nav .fa {
+    color: white;
+}
+
+/* Search  */
 #search {
     position: absolute;
-    top: 38px;
+    top: 50px;
     left: 0%;
     height: 60px;
     z-index: 10;
     margin: 5px;
+    font-size: x-large;
 }
+
+
+#search input {
+    font-family: Raleway, sans-serif;
+}
+
+/* Search End */
 
 /* Sort */
 #sort-div {
-    font-size: 2.0em;
-    font-family: Raleway, sans-serif;
     float: right;
+    margin: 5px;
+    right: 25px;
+    font-size: x-large;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    padding: 16px;
+    border: none;
+    /* Make Button transparent*/
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    outline: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    left: 20px;
+    width: 188px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: lightgoldenrodyellow;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #BCBCBC;
+}
+
+/* End Sort */
+
+
+/* Welcome msg */
+#welcome {
+    left: 40%;
+    top: 45px;
     padding: 5px;
-    position: inherit;
+    position: absolute;
     margin: 5px;
 }
 
-#search h1 {
-    margin: 2px;
+/* Sub content Icons */
+#icons .fa {
+    color: #3299BB;
+    text-shadow: 4px 4px 4px #aaa;
 }
 
-#search input {
-    font-size: 0.7em;
-    font-family: Raleway, sans-serif;
+#icons {
+    border: 5px solid #ececec;
+    margin: 20px;
+    position: relative;
+    padding: 5px;
+    width: 98%;
+    background-color: white;
+    font-size: 40px;
+    display: table;
+    table-layout: fixed;
+    vertical-align: middle;
 }
 
+#icons a {
+    text-decoration: none;
+}
 
+.icon-text {
+    display: block;
+}
+
+.icon-div {
+    display: table-cell;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.icon-div:hover {
+    background-color: lightgoldenrodyellow;
+}
+
+.icon-div span {
+    font-family: Tangerine, sans-serif;
+    color: #3299BB;
+    text-shadow: 4px 4px 4px #aaa;
+}
+
+.fa-search,
+.fa-sort,
+.fa-caret-down {
+    color: #3299BB;
+    text-shadow: 2px 2px 2px #aaa;
+}
 
 #info {
     color: red;
@@ -74,9 +240,6 @@ h4 {
 }
 
 
-
-
-
 img.google {
     border-top: 5px solid #3299BB;
     border-bottom: 5px solid #3299BB;
@@ -86,13 +249,9 @@ img.google {
 
 }
 
-.container {
-    text-align: center;
-    padding-top: 0px;
-}
 
 
-.contact {
+/* .contact {
     border-width: 1px 5px 1px 5px;
     border-style: solid;
     border-color: #999999;
@@ -117,7 +276,7 @@ img.google {
 .contact_tel {
     font-weight: bold;
     font-size: 0.9em;
-}
+} */
 
 #add_p:hover {
     background-color: lightgoldenrodyellow;
@@ -126,9 +285,6 @@ img.google {
 .fa-sign-out:hover {
     background-color: lightgoldenrodyellow;
 }
-
-
-
 
 #b1,
 #b2,
@@ -174,69 +330,12 @@ img.google {
 }
 
 
-
-
-.fa-search,
-.fa-map-marker,
-.fa-gamepad,
-.fa-gift,
-.fa-car,
-.fa-bed,
-.fa-newspaper-o,
-.fa-shopping-cart,
-.fa-sign-in,
-.fa-sort-amount-desc {
-    color: #3299BB;
-    text-shadow: 4px 4px 4px #aaa;
-}
-
-#welcome {
-    left: 40%;
-    padding: 5px;
-    position: absolute;
-    margin: 5px;
-}
-
-#icons {
-    border: 5px solid #ececec;
-    margin: 60px;
-    position: relative;
-    padding: 5px;
-    width: 95%;
-    background-color: white;
-    font-size: 40px;
-    display: table;
-    table-layout: fixed;
-    vertical-align: middle;
-}
-
-#icons a {
-    text-decoration: none;
-}
-
-.icon-text {
-    display: block;
-}
-
-.icon-div {
-    display: table-cell;
-    margin: 20px;
-    padding: 10px;
-    text-align: center;
-}
-
-.icon-div:hover {
-    background-color: lightgoldenrodyellow;
-}
-
-.icon-div span {
-    font-family: Tangerine, sans-serif;
-    color: #3299BB;
-    text-shadow: 4px 4px 4px #aaa;
-}
-
 #list {
     border: 5px solid #ececec;
+}
+
+#index {
+    padding: 0px;
 }
 
 /** Main content **/
@@ -248,7 +347,7 @@ main {
     min-width: 800px;
     max-width: 1200px;
     width: 90%;
-    height: inherit;
+    min-height: 1200px;
 }
 
 main h1 {
@@ -258,59 +357,29 @@ main h1 {
     font-size: 2.0em;
 }
 
+.container {
+    text-align: center;
+    padding-top: 0px;
+}
+
+
 a {
     color: #3299BB;
 }
 
-/** Header **/
-header {
-    height: 40px;
-    position: relative;
-    /* change to fixed*/
-    top: 0px;
-    left: 0px;
+#customer a {
+    color: #424242;
+}
+
+#customer {
     width: 100%;
-    background-color: black;
-    margin: 0px;
-    padding: 0px;
-    overflow: visible;
-}
-
-
-/** Navigation **/
-nav {
-    position: absolute;
-    height: 40px;
-    right: 5%;
-    top: 0px;
-    padding: 0px;
-    margin: 0px;
-    border-right: 1px solid #E9E9E9;
-}
-
-nav ul {
-    margin-top: 0px;
-    padding-left: 10px;
-
-}
-
-nav li {
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
+    background-color: #E9E9E9;
     font-size: 1.0em;
-    border-left: 1px solid #E9E9E9;
-
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    color: #424242;
 }
-
-nav a {
-    color: yellow;
-    font-weight: bold;
-    text-decoration: none;
-}
-
 
 /** product **/
 .prod_left {

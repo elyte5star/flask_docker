@@ -7,10 +7,11 @@ from flask import (
 )
 from modules.auth.auth_bearer import security
 from modules.schemas.responses.base_response import BaseResponse
-from modules.schemas.responses.product import GetProductsDealsResponse
+from modules.schemas.responses.product import GetSortResponse
 from flask_pydantic import validate
 from modules.schemas.requests.order import CreateOrder
 from modules.schemas.responses.order import CreateOrderResponse
+from modules.schemas.requests.product import GetSortRequest
 from newsapi import NewsApiClient
 from modules.auth.auth_bearer import cfg
 
@@ -34,6 +35,20 @@ def index():
         return render_template("index.html", products=list_products)
     user_info = session.get("user")
     return render_template("index.html", userinfo=user_info, products=list_products)
+
+
+# Sort Items
+@pages_bp.route("/sort", methods=["GET"])
+@validate()
+def sort_items(query: GetSortRequest) -> GetSortResponse:
+    print(query.key)
+    sorted_model = handler_prod._sort_items(GetSortRequest(key=query.key))
+    if "user" in session:
+        user_info = session.get("user")
+        return render_template(
+            "sorted.html", products=sorted_model.dict(), userinfo=user_info
+        )
+    return render_template("sorted.html", products=sorted_model.dict())
 
 
 @pages_bp.route("/<pid>/<price>/", methods=["GET"])
@@ -69,17 +84,6 @@ def login():
     return render_template("login.html", google_id=cfg.google_client_id)
 
 
-# Special deals
-@pages_bp.route("/deals")
-@validate()
-def special_deals() -> GetProductsDealsResponse:
-    deals = handler_prod._special_deals()
-    if "user" in session:
-        user_info = session.get("user")
-        return render_template("deals.html", products=deals, userinfo=user_info)
-    return render_template("deals.html", products=deals)
-
-
 @pages_bp.route("/game")
 def game():
     if "user" in session:
@@ -91,10 +95,11 @@ def game():
 @pages_bp.route("/news")
 def news():
     list_articles = news_api.get_top_headlines()["articles"]
+    newlist = sorted(list_articles, key=lambda x: x["title"], reverse=False)
     if "user" in session:
         user_info = session.get("user")
-        return render_template("news.html", userinfo=user_info, headlines=list_articles)
-    return render_template("news.html", headlines=list_articles)
+        return render_template("news.html", userinfo=user_info, headlines=newlist)
+    return render_template("news.html", headlines=newlist)
 
 
 # Map using Open layer

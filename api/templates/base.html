@@ -33,41 +33,49 @@
 </head>
 
 <body>
+
     <header>
         <!-- Navigation bar -->
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/deals">Special deals</a></li>
+                <li><a href="/"><i class="fa fa-fw fa-home"></i>Home</a></li>
                 {% if userinfo %}
                 {% if userinfo['username']=='elyte' %}
-                <li><a href="/admin">Admin module</a></li>
+                <li><a href="/admin"><i class="fa fa-lock"></i>Admin module</a></li>
                 {% endif %}
                 <li><a href="javascript:void(0)">Signed in as {{ userinfo['username'] }}</a></li>
-                <li><a href="/logout" onclick="onSignout();">Logout</a></li>
+                <li><a href="/logout" onclick="onSignout();"><i class="fa fa-sign-out"></i>Logout</a></li>
                 {% else %}
-                <li><a href="/login">Login</a></li>
+                <li><a href="/login"><i class="fa fa-fw fa-user"></i>Login</a></li>
                 {% endif %}
 
             </ul>
         </nav>
     </header>
+    <!-- Search content -->
     <div id="search">
-        <h1>
-            <h1><i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
-                    placeholder="Search" onkeyup="filterEntries();" /></h1>
+        <i class="fa fa-search"></i><input type="text" name="search" id="search-icon" size="15"
+            placeholder="Search content" onkeyup="filterEntries();" />
     </div>
     <h1 id="welcome">Welcome to e-Market</span></h1>
     <!-- Sort content -->
-    <div id="sort-div" class="sort-div">
-        <i class="fa fa-sort-amount-desc"></i>
-        <select name="sort" id="sort" onchange="sortContacts();">
-            <option value="h-l">Price:High-low</option>
-            <option value="l-h">Price:Low-High</option>
-            <option value="popularity">Popularity</option>
-            <option value="deals">Special Deals</option>
-        </select>
+
+    <div class="dropdown" id="sort-div">
+        <i class="fa fa-sort"></i>
+        <button class="dropbtn">Sort content
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/sort?key=deals">Deals</a>
+            {% if not headlines %}
+            <a href="/sort?key=name_asc"><i class="fa fa-sort-alpha-asc"></i>Alpahbetical order</a>
+            <a href="/sort?key=name_desc"><i class="fa fa-sort-alpha-desc"></i>Alpahbetical order</a>
+            <a href="/sort?key=numeric_desc"><i class="fa fa-sort-numeric-desc"></i>Price:High-Low</a>
+            <a href="/sort?key=numeric_asc"><i class="fa fa-sort-numeric-asc"></i>Price:Low-High</a>
+            {% endif %}
+        </div>
     </div>
+
     <!-- Sub content Icons-->
     <div id="icons" class="icons">
         <div class="icon-div"><a href="/map"><i class="fa fa-map-marker"></i><span class="icon-text">Maps</span></a>
@@ -87,14 +95,18 @@
     </div>
 
     <!-- Main content -->
-    <main class="container">
+    <main id="container_" class="container">
         <!--<img src="/static/images/tech.jpeg" alt="Tech" class="banner" /> -->
         {% block content %}
 
         {% endblock %}
 
     </main>
-
+    <!-- Customer Service Footer -->
+    <div id="customer" class="customer"><span class="strong">Customer Service: Telephone:</span> | +4740978057 |
+        Email:
+        <a href="mailto:checkuti@gmail.com">checkuti@gmail.com</a>
+    </div>
     <script src="/static/assets/bootstrap-5.0.2/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
 </body>
 

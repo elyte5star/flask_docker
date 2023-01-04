@@ -1,14 +1,10 @@
 from flask import Blueprint
-from flask_pydantic import validate
 from modules.schemas.requests.product import (
     CreateProductRequest,
-    GetProductDetailsRequest,
 )
 from modules.schemas.responses.product import (
     CreateProductResponse,
-    GetProductsDetailsResponse,
     GetProductsResponse,
-    GetProductsDealsResponse,
 )
 
 products_bp = Blueprint(
@@ -28,11 +24,6 @@ def list_of_products() -> GetProductsResponse:
 @products_bp.route("/<product_id>", methods=["GET"])
 def get_product_details(product_id: str):
     return handler_prod.get_product_details(product_id)
-
-
-@products_bp.route("/deals", methods=["GET"])
-def list_of_products_deals() -> GetProductsDealsResponse:
-    return handler_prod._special_deals()
 
 
 @products_bp.route("/create", methods=["POST"])

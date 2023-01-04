@@ -13,7 +13,7 @@ class GetProductsResponse(BaseResponse):
     data: List = []
 
 
-class GetProductsDealsResponse(GetProductsResponse):
+class GetSortResponse(GetProductsResponse):
     pass
 
 

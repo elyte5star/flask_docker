@@ -5,8 +5,7 @@
     {% for art in headlines %}
     <article class="framed columnx" id="{{ art.publishedAt|format_datetime }}">
         <div class="prod_left">
-            <img src="{{ art['urlToImage'] }}" alt="{{ art['source']['name'] }}" width="200px"
-                height="200px" />
+            <img src="{{ art['urlToImage'] }}" alt="{{ art['source']['name'] }}" width="200px" height="200px" />
             <div class="place">{{ art['source']['name'] }}</div>
         </div>
 
@@ -20,9 +19,6 @@
             <div class="details">Details</div>
         </a>
     </article>
-
     {% endfor %}
-
-
-    {% endblock %}
 </div>
+{% endblock %}

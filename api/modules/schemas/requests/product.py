@@ -14,3 +14,7 @@ class CreateProductRequest(BaseModel):
     image: str
     price: float
     category: str
+
+
+class GetSortRequest(BaseModel):
+    key: str

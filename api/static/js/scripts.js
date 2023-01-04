@@ -1,10 +1,14 @@
 var productsList = new Array();
 
 class Product {
-    constructor(name, price, pid) {
+    constructor(name, price, desc, place, img, pid) {
         this.name = name;
         this.price = price;
+        this.desc = desc;
+        this.place = place;
+        this.img = img;
         this.pid = pid
+        this.display = displayProduct;
 
     }
 }
@@ -121,15 +125,23 @@ async function putData(url = "", data = {}) {
 
 
 
+function displayProduct(idx) {
+    console.log(idx);
+}
+
+function displayProducts() {
+    productsList[0].display(0);
+
+}
+
 async function products() {
     const returned_result = await _getData("./products/all").then((result) => {
         if (result['success'] === true) {
             result.data.forEach(function (item) {
-                let product = new Product(item["name"], item["price"], item["pid"])
+                let product = new Product(item["name"], item["price"], item["description"], item["location"], item["image"], item["pid"])
                 productsList.push(product)
             });
         }
-
     });
 
 }
@@ -159,6 +171,7 @@ function filterEntries() {
 
 }
 
+/* Mark terms functions */
 function mark_text() {
     let strSearch = document.getElementById("search-icon").value;
     var patt = /"(.*?)"/gi;
@@ -176,26 +189,11 @@ function mark_text() {
         });
     });
 }
+/* End Search functions */
 
 
 
 
-
-
-function sortContacts() {
-    console.log("Hello");
-}
-async function specialDeals() {
-    const returned_result = await _getData("./products/deals").then((result) => {
-        if (result['success'] === true) {
-            result.data.forEach(function (item) {
-                console.log(item);
-
-            });
-        }
-    });
-
-}
 /* confirm purchase */
 function confirmProduct() {
     let tel = document.getElementById("aux_tel").value;
@@ -324,11 +322,6 @@ async function signUP() {
         }
     }
 }
-
-
-
-
-
 
 
 /* Admin functions */
